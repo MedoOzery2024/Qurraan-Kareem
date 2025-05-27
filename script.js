@@ -273,6 +273,31 @@ fetch('https://api.alquran.cloud/v1/quran/ar')
     });
   })
   .catch(err => console.error("حدث خطأ في جلب القرآن:", err))
+
+async function fetchQuran() {
+    try {
+        const response = await fetch('https://api.alquran.cloud/v1/quran/ar.alafasy');
+        const data = await response.json();
+        if (data.status === "OK") {
+            const surahs = data.data.surahs;
+            const container = document.getElementById('quran-container');
+            surahs.forEach(surah => {
+                // اسم السورة
+                const surahTitle = document.createElement('h2');
+                surahTitle.textContent = `سورة ${surah.englishName} - ${surah.name}`;
+                container.appendChild(surahTitle);
+                // آيات السورة
+                surah.ayahs.forEach(ayah => {
+                    const ayahElem = document.createElement('p');
+                    ayahElem.textContent = `${ayah.text} (${ayah.numberInSurah})`;
+                    container.appendChild(ayahElem);
+                });
+            });
+        }
+    } catch (error) {
+        console.error('حدث خطأ أثناء جلب القرآن:', error);
+    }
+}
 // ===== وظائف الأحاديث =====
 function showHadithCategory(category) {
   const content = document.getElementById('hadith-content');
@@ -298,7 +323,25 @@ function showHadithCategory(category) {
     content.appendChild(hadithDiv);
   });
 }
-
+async function fetchHadith() {
+    try {
+        // تحتاج مفتاح API من https://api.sunnah.com/
+        const response = await fetch('https://api.sunnah.com/v1/collections/bukhari/books/1/hadiths', {
+            headers: {
+                'X-API-Key': 'YOUR_API_KEY' // ضع مفتاحك هنا
+            }
+        });
+        const data = await response.json();
+        const container = document.getElementById('hadith-container');
+        data.data.hadiths.forEach(hadith => {
+            const hadithElem = document.createElement('p');
+            hadithElem.textContent = hadith.hadith[0].text;
+            container.appendChild(hadithElem);
+        });
+    } catch (error) {
+        console.error('حدث خطأ أثناء جلب الحديث:', error);
+    }
+}
 // ===== وظائف الأدعية =====
 function showDuaCategory(category) {
   const content = document.getElementById('dua-content');
@@ -631,3 +674,5 @@ window.setTarget = setTarget;
 window.updatePrayerTimes = updatePrayerTimes;
 window.findQibla = findQibla;
 window.toggleMobileMenu = toggleMobileMenu;
+window.onload = function() {
+    fetchQuran();
