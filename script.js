@@ -254,8 +254,25 @@ function loadSurah(surahNumber) {
       <div class="ayah">هذا مثال على عرض الآيات - يجب ربطه بـ API للقرآن الكريم للحصول على النص الكامل</div>
     </div>
   `;
-}
-
+} 
+// تحميل القرآن الكريم بالكامل
+fetch('https://api.alquran.cloud/v1/quran/ar')
+  .then(response => response.json())
+  .then(data => {
+    const quranContainer = document.getElementById("quran-section");
+    data.data.surahs.forEach(surah => {
+      const surahDiv = document.createElement("div");
+      surahDiv.className = "surah";
+      surahDiv.innerHTML = `<h3>${surah.name}</h3>`;
+      surah.ayahs.forEach(ayah => {
+        const ayahP = document.createElement("p");
+        ayahP.textContent = `${ayah.numberInSurah}. ${ayah.text}`;
+        surahDiv.appendChild(ayahP);
+      });
+      quranContainer.appendChild(surahDiv);
+    });
+  })
+  .catch(err => console.error("حدث خطأ في جلب القرآن:", err))
 // ===== وظائف الأحاديث =====
 function showHadithCategory(category) {
   const content = document.getElementById('hadith-content');
