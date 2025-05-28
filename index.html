@@ -1,341 +1,64 @@
 
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>فَإِنِّي قَرِيبٌ </title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فأني قريب</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="logo">
-        <div class="logo-icon">
-          <i class="fas fa-mosque"></i>
+    <header>
+        <div class="logo">
+            <div class="mosque-icon"></div>
+            <div class="quran-icon"></div>
+            <h1>فأني قريب</h1>
         </div>
-        <div class="logo-text">
-          <h1>فَإِنِّي قَرِيبٌ</h1>
-          <p>وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ</p> 
-          <p>تصميم المبرمج:محمود محمد محمود أبو الفتوح احمد العزيري </p>
-        </div>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="#home" onclick="showSection('home')"><i class="fas fa-home"></i> الرئيسية</a></li>
-          <li><a href="#quran" onclick="showSection('quran')"><i class="fas fa-book-open"></i> القرآن الكريم</a></li>
-          <li><a href="#hadith" onclick="showSection('hadith')"><i class="fas fa-scroll"></i> الأحاديث</a></li>
-          <li><a href="#dua" onclick="showSection('dua')"><i class="fas fa-hands"></i> الأدعية</a></li>
-          <li><a href="#sebha" onclick="showSection('sebha')"><i class="fas fa-circle-notch"></i> السبحة</a></li>
-          <li><a href="#prayer" onclick="showSection('prayer')"><i class="fas fa-clock"></i> مواقيت الصلاة</a></li>
-          <li><a href="#names" onclick="showSection('names')"><i class="fas fa-star"></i> الأسماء الحسنى</a></li>
-          <li><a href="#qibla" onclick="showSection('qibla')"><i class="fas fa-compass"></i> القبلة</a></li>
-        </ul>
-      </nav>
-      <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-        <i class="fas fa-bars"></i>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <!-- الصفحة الرئيسية -->
-    <section id="home" class="section active">
-      <div class="hero">
-        <div class="hero-content">
-          <h1>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h1>
-          <p class="hero-subtitle">موقع ديني شامل للمسلمين في جميع أنحاء العالم</p>
-          <div class="hero-buttons">
-            <button onclick="showSection('quran')" class="btn btn-primary">
-              <i class="fas fa-book-open"></i>
-              القرآن الكريم
-            </button>
-            <button onclick="showSection('sebha')" class="btn btn-secondary">
-              <i class="fas fa-circle-notch"></i>
-              السبحة الإلكترونية
-            </button>
-          </div>
-        </div>
-      </div>
-      
-      <div class="features">
-        <h2>خدماتنا</h2>
-        <div class="features-grid">
-          <div class="feature-card" onclick="showSection('quran')">
-            <i class="fas fa-book-open"></i>
-            <h3>القرآن الكريم</h3>
-            <p>اقرأ واستمع للقرآن الكريم بترتيل جميل</p>
-          </div>
-          <div class="feature-card" onclick="showSection('hadith')">
-            <i class="fas fa-scroll"></i>
-            <h3>الأحاديث النبوية</h3>
-            <p>أحاديث صحيحة من السنة النبوية المطهرة</p>
-          </div>
-          <div class="feature-card" onclick="showSection('prayer')">
-            <i class="fas fa-clock"></i>
-            <h3>مواقيت الصلاة</h3>
-            <p>أوقات الصلاة الدقيقة لموقعك</p>
-          </div>
-          <div class="feature-card" onclick="showSection('qibla')">
-            <i class="fas fa-compass"></i>
-            <h3>اتجاه القبلة</h3>
-            <p>تحديد اتجاه القبلة بدقة</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- القرآن الكريم -->
-    <section id="quran" class="section">
-      <div class="container">
-        <h2><i class="fas fa-book-open"></i> القرآن الكريم</h2>
-        <div class="quran-container">
-          <div class="surah-list">
-            <h3>السور</h3>
-            <div class="search-box">
-              <input type="text" id="surah-search" placeholder="ابحث عن السورة..." onkeyup="searchSurah()">
+        <nav>
+            <ul>
+                <li><a href="#prayer-times">مواعيد الصلاة</a></li>
+                <li><a href="#quran">القرآن الكريم</a></li>
+                <li><a href="#hadith">الأحاديث النبوية</a></li>
+                <li><a href="#dua">الأدعية والأذكار</a></li>
+                <li><a href="#tasbeeh">السبحة الإلكترونية</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="prayer-times">
+            <h2>مواعيد الصلاة</h2>
+            <div id="prayer-times-content"></div>
+        </section>
+        <section id="quran">
+            <h2>القرآن الكريم</h2>
+            <div id="quran-content"></div>
+        </section>
+        <section id="hadith">
+            <h2>الأحاديث النبوية</h2>
+            <div id="hadith-content"></div>
+        </section>
+        <section id="dua">
+            <h2>الأدعية والأذكار</h2>
+            <div id="dua-content"></div>
+        </section>
+        <section id="tasbeeh">
+            <h2>السبحة الإلكترونية</h2>
+            <div class="tasbeeh-container">
+                <button onclick="tasbeeh('سبحان الله')">سبحان الله</button>
+                <button onclick="tasbeeh('الحمد لله')">الحمد لله</button>
+                <button onclick="tasbeeh('الله أكبر')">الله أكبر</button>
+                <button onclick="tasbeeh('لا حول ولا قوة إلا بالله')">لا حول ولا قوة إلا بالله</button>
+                <button onclick="tasbeeh('أستغفر الله')">أستغفر الله</button>
+                <button onclick="tasbeeh('اللهم صل على النبي')">اللهم صل على النبي</button>
+                <button onclick="tasbeeh('لا إله إلا الله')">لا إله إلا الله</button>
+                <p id="counter">العدد: 0</p>
             </div>
-            <div id="surah-list-container">
-              <!-- سيتم ملؤها بالجافا سكريبت -->
-            </div>
-          </div>
-          <div class="quran-reader">
-            <div id="quran-content">
-              <div class="welcome-quran">
-                <i class="fas fa-book-open"></i>
-                <h3>اختر سورة للقراءة</h3>
-                <p>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-<div id="root"></div>
-    <!-- تحميل واجهة القرآن الكريم -->
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-     <script type="module" src="/src/main.tsx"></script>
-    <!-- الأحاديث النبوية -->
-    <section id="hadith" class="section">
-      <div class="container">
-        <h2><i class="fas fa-scroll"></i> الأحاديث النبوية</h2>
-        <div class="hadith-container">
-          <div class="hadith-categories">
-            <button onclick="showHadithCategory('daily')" class="category-btn active">أحاديث يومية</button>
-            <button onclick="showHadithCategory('prayer')" class="category-btn">الصلاة</button>
-            <button onclick="showHadithCategory('akhlaq')" class="category-btn">الأخلاق</button>
-            <button onclick="showHadithCategory('zakat')" class="category-btn">الزكاة</button>
-          </div>
-          <div id="hadith-content">
-            <!-- سيتم ملؤها بالجافا سكريبت -->
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- الأدعية -->
-    <section id="dua" class="section">
-      <div class="container">
-        <h2><i class="fas fa-hands"></i> الأدعية المأثورة</h2>
-        <div class="dua-container">
-          <div class="dua-categories">
-            <button onclick="showDuaCategory('morning')" class="category-btn active">أذكار الصباح</button>
-            <button onclick="showDuaCategory('evening')" class="category-btn">أذكار المساء</button>
-            <button onclick="showDuaCategory('sleep')" class="category-btn">أذكار النوم</button>
-            <button onclick="showDuaCategory('general')" class="category-btn">أدعية عامة</button>
-          </div>
-          <div id="dua-content">
-            <!-- سيتم ملؤها بالجافا سكريبت -->
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- السبحة الإلكترونية -->
-    <section id="sebha" class="section">
-      <div class="container">
-        <h2><i class="fas fa-circle-notch"></i> السبحة الإلكترونية</h2>
-        <div class="sebha-container">
-          <div class="sebha-main">
-            <div class="sebha-circle">
-              <div class="sebha-counter" id="main-counter">0</div>
-              <div class="sebha-current-zikr" id="current-zikr">سبحان الله</div>
-            </div>
-            <button class="sebha-btn" onclick="incrementMainCounter()">
-              <i class="fas fa-hand-point-up"></i>
-              تسبيح
-            </button>
-          </div>
-          
-          <div class="zikr-grid">
-            <div class="zikr-card" data-zikr="subhanallah">
-              <h3>سبحان الله</h3>
-              <div class="zikr-counter">
-                <span id="subhanallah">0</span>
-                <button onclick="count('subhanallah')">+</button>
-              </div>
-            </div>
-            <div class="zikr-card" data-zikr="alhamdulillah">
-              <h3>الحمد لله</h3>
-              <div class="zikr-counter">
-                <span id="alhamdulillah">0</span>
-                <button onclick="count('alhamdulillah')">+</button>
-              </div>
-            </div>
-            <div class="zikr-card" data-zikr="allahu_akbar">
-              <h3>الله أكبر</h3>
-              <div class="zikr-counter">
-                <span id="allahu_akbar">0</span>
-                <button onclick="count('allahu_akbar')">+</button>
-              </div>
-            </div>
-            <div class="zikr-card" data-zikr="la_ilaha">
-              <h3>لا إله إلا الله</h3>
-              <div class="zikr-counter">
-                <span id="la_ilaha">0</span>
-                <button onclick="count('la_ilaha')">+</button>
-              </div>
-            </div>
-            <div class="zikr-card" data-zikr="salat">
-              <h3>اللهم صل على النبي</h3>
-              <div class="zikr-counter">
-                <span id="salat">0</span>
-                <button onclick="count('salat')">+</button>
-              </div>
-            </div>
-            <div class="zikr-card" data-zikr="istighfar">
-              <h3>أستغفر الله</h3>
-              <div class="zikr-counter">
-                <span id="istighfar">0</span>
-                <button onclick="count('istighfar')">+</button>
-              </div>
-            </div>
-          </div>
-          
-          <div class="sebha-controls">
-            <button onclick="resetCounts()" class="btn btn-warning">
-              <i class="fas fa-redo"></i>
-              إعادة التعيين
-            </button>
-            <button onclick="setTarget()" class="btn btn-info">
-              <i class="fas fa-target"></i>
-              تحديد هدف
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- مواقيت الصلاة -->
-    <section id="prayer" class="section">
-      <div class="container">
-        <h2><i class="fas fa-clock"></i> مواقيت الصلاة</h2>
-        <div class="prayer-container">
-          <div class="location-selector">
-            <h3>اختر موقعك</h3>
-            <select id="city-select" onchange="updatePrayerTimes()">
-              <option value="mecca">مكة المكرمة</option>
-              <option value="medina">المدينة المنورة</option>
-              <option value="riyadh">الرياض</option>
-              <option value="cairo">القاهرة</option>
-              <option value="dubai">دبي</option>
-              <option value="kuwait">الكويت</option>
-              <option value="doha">الدوحة</option>
-              <option value="baghdad">بغداد</option>
-              <option value="damascus">دمشق</option>
-              <option value="amman">عمان</option>
-            </select>
-          </div>
-          
-          <div class="prayer-times" id="prayer-times">
-            <!-- سيتم ملؤها بالجافا سكريبت -->
-          </div>
-          
-          <div class="next-prayer">
-            <h3>الصلاة القادمة</h3>
-            <div id="next-prayer-info">
-              <!-- سيتم ملؤها بالجافا سكريبت -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- الأسماء الحسنى -->
-    <section id="names" class="section">
-      <div class="container">
-        <h2><i class="fas fa-star"></i> الأسماء الحسنى</h2>
-        <div class="names-container">
-          <div class="names-grid" id="names-grid">
-            <!-- سيتم ملؤها بالجافا سكريبت -->
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- القبلة -->
-    <section id="qibla" class="section">
-      <div class="container">
-        <h2><i class="fas fa-compass"></i> اتجاه القبلة</h2>
-        <div class="qibla-container">
-          <div class="compass-container">
-            <div class="compass" id="compass">
-              <div class="compass-needle" id="compass-needle"></div>
-              <div class="compass-direction">N</div>
-              <div class="kaaba-direction" id="kaaba-direction">
-                <i class="fas fa-kaaba"></i>
-              </div>
-            </div>
-            <div class="qibla-info">
-              <h3>معلومات الاتجاه</h3>
-              <p id="qibla-angle">زاوية القبلة: --°</p>
-              <p id="distance-to-mecca">المسافة إلى مكة: -- كم</p>
-            </div>
-          </div>
-          <button onclick="findQibla()" class="btn btn-primary">
-            <i class="fas fa-location-arrow"></i>
-            تحديد القبلة
-          </button>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>فَإِنِّي قَرِيبٌ</h3>
-          <p>موقع ديني شامل يهدف لخدمة المسلمين في جميع أنحاء العالم</p>
-        </div>
-        <div class="footer-section">
-          <h3>روابط سريعة</h3>
-          <ul>
-            <li><a href="#quran">القرآن الكريم</a></li>
-            <li><a href="#hadith">الأحاديث</a></li>
-            <li><a href="#prayer">مواقيت الصلاة</a></li>
-            <li><a href="#qibla">اتجاه القبلة</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>تواصل معنا</h3>
-          <div class="social-links">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-            <a href="#"><i class="fab fa-telegram"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 فَإِنِّي قَرِيبٌ - جميع الحقوق محفوظة</p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+        </section>
+    </main>
+    <footer>
+        <p>تصميم المبرمج :محمود محمد محمود أبو الفتوح احمد العزيري</p>
+    </footer>
+    <script src="script.js"></script>
 </body>
 </html>
+
