@@ -1,95 +1,140 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
+
+:root {
+    --main-color: #198754;
+    --accent-color: #22d197;
+    --background: #f6fefb;
+    --card-bg: #fff;
+    --shadow: 0 4px 24px #0001;
+    --header-bg: linear-gradient(120deg, #198754 60%, #22d197 100%);
+    --nav-bg: #fff;
+    --button-bg: #198754;
+    --button-hover: #22d197;
+    --button-active: #146c43;
+    --text-dark: #123c2b;
+    --text-light: #fff;
+    --border-radius: 18px;
+    --transition: 0.2s;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
 
 body {
     font-family: 'Tajawal', Arial, sans-serif;
-    background: linear-gradient(120deg, #e9f5ec 0%, #bde5d8 100%);
+    background: var(--background);
     margin: 0;
     padding: 0;
-    color: #222;
+    color: var(--text-dark);
     direction: rtl;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 header {
-    background: #1a7f5a;
-    color: #fff;
+    background: var(--header-bg);
+    color: var(--text-light);
     text-align: center;
-    padding: 40px 10px 20px 10px;
+    padding: 2.5rem 1rem 1.5rem 1rem;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    box-shadow: var(--shadow);
     position: relative;
 }
 
 .logo {
-    width: 90px;
-    height: 90px;
+    width: 85px;
+    height: 85px;
     border-radius: 50%;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     border: 3px solid #fff;
-    box-shadow: 0 0 8px #2ad49f88;
+    box-shadow: 0 0 10px #22d19777;
     background-color: #fff;
     object-fit: cover;
+    transition: transform 0.3s;
+}
+.logo:hover {
+    transform: scale(1.07) rotate(-3deg);
 }
 
 header h1 {
-    font-size: 2.5em;
+    font-size: 2.4em;
     font-weight: 900;
     margin: 0;
-    letter-spacing: 2px;
-}
-
-.subtitle {
-    font-size: 1.2em;
-    margin-top: 10px;
-    font-weight: 500;
     letter-spacing: 1px;
 }
 
+.subtitle {
+    font-size: 1.1em;
+    margin-top: 7px;
+    font-weight: 500;
+}
+
 .developer {
-    display: block;
-    margin-top: 10px;
+    display: inline-block;
+    margin-top: 12px;
     font-size: 1em;
-    background: #fff6;
-    color: #085f37;
-    border-radius: 10px;
-    padding: 6px 12px;
+    background: #fff3;
+    color: #e3f7ed;
+    border-radius: 9px;
+    padding: 4px 16px;
     font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 nav {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 12px;
-    background: #fff;
-    box-shadow: 0 2px 6px #0002;
-    padding: 12px 0;
+    background: var(--nav-bg);
+    box-shadow: 0 2px 8px #19875410;
+    padding: 10px 0;
+    margin-bottom: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 nav button {
     font-family: inherit;
     font-size: 1.1em;
-    background: #1a7f5a;
-    color: #fff;
+    background: var(--button-bg);
+    color: var(--text-light);
     border: none;
-    border-radius: 18px;
-    padding: 12px 24px;
+    border-radius: 16px;
+    padding: 12px 22px;
     cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
+    transition: background var(--transition), transform var(--transition), color var(--transition);
     font-weight: 700;
+    box-shadow: 0 2px 4px #19875411;
 }
-
-nav button:hover {
-    background: #2ad49f;
-    color: #191919;
+nav button:hover, nav button:focus {
+    background: var(--button-hover);
+    color: var(--text-dark);
     transform: translateY(-2px) scale(1.05);
+    outline: none;
+}
+nav button:active {
+    background: var(--button-active);
+    color: #fff;
 }
 
 main {
     max-width: 900px;
-    margin: 32px auto;
-    background: #fff;
-    border-radius: 18px;
-    box-shadow: 0 4px 24px #0001;
-    padding: 36px 18px 24px 18px;
+    margin: 36px auto;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 34px 20px 28px 20px;
     min-height: 400px;
+    transition: box-shadow 0.2s;
 }
 
 .content-section {
@@ -102,31 +147,39 @@ main {
 }
 
 @keyframes fadein {
-    from { opacity: 0; transform: translateY(20px);}
+    from { opacity: 0; transform: translateY(30px);}
     to { opacity: 1; transform: translateY(0);}
 }
 
 h2 {
-    color: #1a7f5a;
+    color: var(--main-color);
     margin-bottom: 18px;
     font-weight: 900;
+    font-size: 2em;
+    letter-spacing: 1px;
 }
 
 select, input[type="text"] {
     font-family: inherit;
     font-size: 1em;
-    border: 1px solid #1a7f5a88;
+    border: 1px solid #19875444;
     border-radius: 7px;
     padding: 7px 11px;
     margin: 6px 0 16px 0;
-    background: #f4faf7;
-    color: #1a7f5a;
+    background: #f8fefb;
+    color: #198754;
+    transition: border 0.2s;
+    min-width: 130px;
+}
+input[type="text"]:focus, select:focus {
+    border-color: #22d197;
+    outline: none;
 }
 
 button#sebha-increment {
-    background: #2ad49f;
+    background: var(--accent-color);
     color: #fff;
-    font-size: 1.15em;
+    font-size: 1.12em;
     border: none;
     border-radius: 15px;
     padding: 10px 30px;
@@ -134,11 +187,15 @@ button#sebha-increment {
     font-weight: 900;
     transition: background 0.2s, transform 0.2s;
     cursor: pointer;
+    box-shadow: 0 1px 4px #22d19722;
 }
 
-button#sebha-increment:hover {
-    background: #1a7f5a;
-    transform: scale(1.05);
+button#sebha-increment:hover, button#sebha-increment:focus {
+    background: var(--main-color);
+    transform: scale(1.06);
+}
+button#sebha-increment:active {
+    background: #157347;
 }
 
 .sebha-counter {
@@ -146,18 +203,21 @@ button#sebha-increment:hover {
     display: flex;
     align-items: center;
     gap: 16px;
+    flex-wrap: wrap;
 }
 
 #sebha-count {
     font-size: 2.1em;
     font-weight: 700;
-    color: #1a7f5a;
+    color: var(--main-color);
     background: #e9f5ec;
-    border: 2px solid #2ad49f88;
+    border: 2px solid #22d19799;
     border-radius: 14px;
     padding: 6px 26px;
     min-width: 60px;
     text-align: center;
+    transition: box-shadow 0.2s;
+    box-shadow: 0 2px 8px #22d19711;
 }
 
 #sebha-reset {
@@ -170,8 +230,7 @@ button#sebha-increment:hover {
     cursor: pointer;
     transition: background 0.2s;
 }
-
-#sebha-reset:hover {
+#sebha-reset:hover, #sebha-reset:focus {
     background: #ff9800;
 }
 
@@ -186,20 +245,102 @@ button#sebha-increment:hover {
     padding: 12px 18px;
     min-height: 50px;
     color: #235d44;
-    font-size: 1.1em;
+    font-size: 1.13em;
     font-weight: 500;
-    box-shadow: 0 2px 8px #1a7f5a11;
-    line-height: 2.1;
+    box-shadow: 0 2px 8px #19875411;
+    line-height: 2.08;
     word-break: break-word;
 }
 
 footer {
     text-align: center;
-    background: #1a7f5a;
+    background: var(--main-color);
     color: #fff;
-    padding: 16px 0 10px 0;
-    border-radius: 0 0 16px 16px;
+    padding: 15px 0 10px 0;
+    border-radius: 0 0 15px 15px;
     margin-top: 32px;
     font-size: 1em;
     font-weight: 500;
+    box-shadow: 0 -2px 12px #19875411;
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+    background: #e9f5ec;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #b9e5c8;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #22d19777;
+}
+
+/* --------- استجابة التصميم للأجهزة المختلفة --------- */
+@media (max-width: 770px) {
+    main {
+        max-width: 98vw;
+        margin: 16px 1vw;
+        padding: 24px 7px 20px 7px;
+    }
+    nav button {
+        padding: 10px 10px;
+        font-size: 1em;
+    }
+    h2 {
+        font-size: 1.3em;
+    }
+    .logo {
+        width: 65px;
+        height: 65px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 1.5rem 2vw 1rem 2vw;
+    }
+    .logo {
+        width: 50px;
+        height: 50px;
+    }
+    main {
+        padding: 11px 2px 13px 2px;
+        border-radius: 13px;
+    }
+    nav {
+        gap: 7px;
+        padding: 7px 0;
+    }
+    nav button {
+        padding: 7px 6px;
+        font-size: 0.99em;
+        border-radius: 10px;
+    }
+    #ayahs, #hadith-text, #azkar-list, #prayer-result {
+        padding: 7px 6px;
+        font-size: 1em;
+    }
+    h2 {
+        font-size: 1.1em;
+    }
+    .sebha-counter {
+        gap: 8px;
+    }
+    #sebha-count {
+        font-size: 1.3em;
+        padding: 4px 11px;
+        min-width: 39px;
+    }
+}
+
+@media (max-width: 350px) {
+    nav {
+        flex-direction: column;
+        gap: 4px;
+    }
+    nav button {
+        width: 100%;
+    }
 }
