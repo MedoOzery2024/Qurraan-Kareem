@@ -49,17 +49,31 @@ quranSurahSelector && quranSurahSelector.addEventListener('change', () => {
 });
 window.addEventListener('DOMContentLoaded', loadQuranSurahs);
 
-// ----------- الأحاديث النبوية API -----------
-// جلب حديث معين من البخاري مثلا
-fetch('https://api.hadith.sutanlab.id/books/bukhari/1')
+// ----------- الأحاديث النبوية API ---------
+// جلب كتب الحديث
+fetch('https://api.hadith.gading.dev/books')
   .then(res => res.json())
   .then(data => {
-    const hadithText = data.data.contents.arab; // نص الحديث
-    const source = data.data.book; // اسم الكتاب
+    // عرض الكتب في select
+    // data.data = [{id: "bukhari", name: "صحيح البخاري"}, ...]
+  });
+
+// عند اختيار كتاب:
+fetch('https://api.hadith.gading.dev/books/bukhari?range=1-10')
+  .then(res => res.json())
+  .then(data => {
+    // data.data.hadiths = [{number: 1, arab: "...", id: 1}, ...]
+  });
+
+// عند اختيار حديث:
+fetch('https://api.hadith.gading.dev/books/bukhari/1')
+  .then(res => res.json())
+  .then(data => {
+    // data.data.contents.arab
   });
 // ----------- الأذكار والأدعية -----------
 // جلب أذكار الصباح
-fetch('https://azkar-api.nawafdev.com/azkar?category=morning')
+fetch('https://api.hadith.gading.dev/')
   .then(res => res.json())
   .then(data => {
     const morningAzkar = data.content; // مصفوفة الأذكار
