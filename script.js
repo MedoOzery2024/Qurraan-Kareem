@@ -7,51 +7,51 @@ function tasbeeh(text) {
     alert(text);
 }
 
-async function fetchPrayerTimes() {
-    try {
-        const response = await fetch('http://api.aladhan.com/v1/timingsByCity?city=Cairo&country=Egypt&method=5');
-        const data = await response.json();
-        displayPrayerTimes(data.data.timings);
-    } catch (error) {
-        console.error('Error fetching prayer times:', error);
-    }
-}
-
-function displayPrayerTimes(timings) {
+// Mock data for prayer times
+function displayPrayerTimes() {
     const prayerTimesDiv = document.getElementById('prayer-times-content');
     prayerTimesDiv.innerHTML = ''; // Clear previous content
-    for (const [prayer, time] of Object.entries(timings)) {
+
+    const mockPrayerTimes = {
+        "Fajr": "05:00 AM",
+        "Dhuhr": "12:00 PM",
+        "Asr": "03:30 PM",
+        "Maghrib": "06:00 PM",
+        "Isha": "07:30 PM"
+    };
+
+    for (const [prayer, time] of Object.entries(mockPrayerTimes)) {
         const prayerElement = document.createElement('p');
         prayerElement.textContent = `${prayer}: ${time}`;
         prayerTimesDiv.appendChild(prayerElement);
     }
 }
 
-async function fetchQuran() {
-    try {
-        const response = await fetch('http://api.quran.com/api/v3/surahs');
-        const data = await response.json();
-        displayQuran(data.data);
-    } catch (error) {
-        console.error('Error fetching Quran:', error);
-    }
-}
-
-async function fetchTafsir(ayahKey) {
-    try {
-        const response = await fetch(`http://api.quran.com/api/v3/tafsir/ayah/${ayahKey}`);
-        const data = await response.json();
-        return data.data.tafsir;
-    } catch (error) {
-        console.error('Error fetching Tafsir:', error);
-        return 'لا يوجد تفسير متاح لهذه الآية.';
-    }
-}
-
-async function displayQuran(surahs) {
+// Mock data for Quran
+function displayQuran() {
     const quranDiv = document.getElementById('quran-content');
     quranDiv.innerHTML = ''; // Clear previous content
-    for (const surah of surahs) {
+
+    const mockSurahs = [
+        {
+            name: "الفاتحة",
+            englishName: "Al-Fatiha",
+            ayahs: [
+                { text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ", tafsir: "التفسير: هذه الآية هي بداية كل سورة في القرآن الكريم." },
+                { text: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ", tafsir: "التفسير: الحمد لله رب العالمين." }
+            ]
+        },
+        {
+            name: "البقرة",
+            englishName: "Al-Baqara",
+            ayahs: [
+                { text: "الم", tafsir: "التفسير: هذه الحروف المقطعة لها معاني خاصة." },
+                { text: "ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ", tafsir: "التفسير: هذا الكتاب لا ريب فيه هدى للمتقين." }
+            ]
+        }
+    ];
+
+    for (const surah of mockSurahs) {
         const surahElement = document.createElement('div');
         surahElement.innerHTML = `<h3>${surah.name} (${surah.englishName})</h3>`;
         quranDiv.appendChild(surahElement);
@@ -61,57 +61,50 @@ async function displayQuran(surahs) {
             ayahElement.textContent = `${ayah.text}`;
             surahElement.appendChild(ayahElement);
 
-            const tafsir = await fetchTafsir(ayah.ayahKey);
             const tafsirElement = document.createElement('p');
-            tafsirElement.textContent = `التفسير: ${tafsir}`;
+            tafsirElement.textContent = `التفسير: ${ayah.tafsir}`;
             tafsirElement.style.fontStyle = 'italic';
             surahElement.appendChild(tafsirElement);
         }
     }
 }
 
-async function fetchHadith() {
-    try {
-        const response = await fetch('https://hadithapi.com/api/hadiths?apiKey=YOUR_API_KEY');
-        const data = await response.json();
-        displayHadith(data.hadiths);
-    } catch (error) {
-        console.error('Error fetching Hadith:', error);
-    }
-}
-
-function displayHadith(hadiths) {
+// Mock data for Hadith
+function displayHadith() {
     const hadithDiv = document.getElementById('hadith-content');
     hadithDiv.innerHTML = ''; // Clear previous content
-    hadiths.forEach(hadith => {
+
+    const mockHadiths = [
+        { text: "إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى.", narrator: "عمر بن الخطاب" },
+        { text: "من حسن إسلام المرء تركه ما لا يعنيه.", narrator: "أبو هريرة" }
+    ];
+
+    mockHadiths.forEach(hadith => {
         const hadithElement = document.createElement('div');
         hadithElement.innerHTML = `<p>${hadith.text}</p><p><strong>الراوي:</strong> ${hadith.narrator}</p>`;
         hadithDiv.appendChild(hadithElement);
     });
 }
 
-async function fetchDua() {
-    try {
-        const response = await fetch('https://hisnmuslim.com/api/ar/1.json');
-        const data = await response.json();
-        displayDua(data);
-    } catch (error) {
-        console.error('Error fetching Dua:', error);
-    }
-}
-
-function displayDua(data) {
+// Mock data for Dua
+function displayDua() {
     const duaDiv = document.getElementById('dua-content');
     duaDiv.innerHTML = ''; // Clear previous content
+
+    const mockDua = {
+        content: "اللهم إني أسألك العفو والعافية في الدنيا والآخرة. اللهم إني أسألك العفو والعافية في ديني ودنياي وأهلي ومالي.",
+        source: "صحيح البخاري"
+    };
+
     const duaElement = document.createElement('div');
-    duaElement.innerHTML = `<p>${data.content}</p><p><strong>المصدر:</strong> ${data.source}</p>`;
+    duaElement.innerHTML = `<p>${mockDua.content}</p><p><strong>المصدر:</strong> ${mockDua.source}</p>`;
     duaDiv.appendChild(duaElement);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    fetchPrayerTimes();
-    fetchQuran();
-    fetchHadith();
-    fetchDua();
+    displayPrayerTimes();
+    displayQuran();
+    displayHadith();
+    displayDua();
 });
 
