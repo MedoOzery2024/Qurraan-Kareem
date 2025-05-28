@@ -19,6 +19,7 @@ async function fetchPrayerTimes() {
 
 function displayPrayerTimes(timings) {
     const prayerTimesDiv = document.getElementById('prayer-times-content');
+    prayerTimesDiv.innerHTML = ''; // Clear previous content
     for (const [prayer, time] of Object.entries(timings)) {
         const prayerElement = document.createElement('p');
         prayerElement.textContent = `${prayer}: ${time}`;
@@ -28,21 +29,45 @@ function displayPrayerTimes(timings) {
 
 async function fetchQuran() {
     try {
-        const response = await fetch('http://api.qalb.me/v1/surah');
+        const response = await fetch('http://api.quran.com/api/v3/surahs');
         const data = await response.json();
-        displayQuran(data);
+        displayQuran(data.data);
     } catch (error) {
         console.error('Error fetching Quran:', error);
     }
 }
 
-function displayQuran(data) {
+async function fetchTafsir(ayahKey) {
+    try {
+        const response = await fetch(`http://api.quran.com/api/v3/tafsir/ayah/${ayahKey}`);
+        const data = await response.json();
+        return data.data.tafsir;
+    } catch (error) {
+        console.error('Error fetching Tafsir:', error);
+        return 'لا يوجد تفسير متاح لهذه الآية.';
+    }
+}
+
+async function displayQuran(surahs) {
     const quranDiv = document.getElementById('quran-content');
-    data.forEach(surah => {
-        const surahElement = document.createElement('p');
-        surahElement.textContent = `${surah.name} (${surah.englishName})`;
+    quranDiv.innerHTML = ''; // Clear previous content
+    for (const surah of surahs) {
+        const surahElement = document.createElement('div');
+        surahElement.innerHTML = `<h3>${surah.name} (${surah.englishName})</h3>`;
         quranDiv.appendChild(surahElement);
-    });
+
+        for (const ayah of surah.ayahs) {
+            const ayahElement = document.createElement('p');
+            ayahElement.textContent = `${ayah.text}`;
+            surahElement.appendChild(ayahElement);
+
+            const tafsir = await fetchTafsir(ayah.ayahKey);
+            const tafsirElement = document.createElement('p');
+            tafsirElement.textContent = `التفسير: ${tafsir}`;
+            tafsirElement.style.fontStyle = 'italic';
+            surahElement.appendChild(tafsirElement);
+        }
+    }
 }
 
 async function fetchHadith() {
@@ -57,9 +82,10 @@ async function fetchHadith() {
 
 function displayHadith(hadiths) {
     const hadithDiv = document.getElementById('hadith-content');
+    hadithDiv.innerHTML = ''; // Clear previous content
     hadiths.forEach(hadith => {
-        const hadithElement = document.createElement('p');
-        hadithElement.textContent = `${hadith.text}`;
+        const hadithElement = document.createElement('div');
+        hadithElement.innerHTML = `<p>${hadith.text}</p><p><strong>الراوي:</strong> ${hadith.narrator}</p>`;
         hadithDiv.appendChild(hadithElement);
     });
 }
@@ -76,8 +102,9 @@ async function fetchDua() {
 
 function displayDua(data) {
     const duaDiv = document.getElementById('dua-content');
-    const duaElement = document.createElement('p');
-    duaElement.textContent = `${data.content}`;
+    duaDiv.innerHTML = ''; // Clear previous content
+    const duaElement = document.createElement('div');
+    duaElement.innerHTML = `<p>${data.content}</p><p><strong>المصدر:</strong> ${data.source}</p>`;
     duaDiv.appendChild(duaElement);
 }
 
@@ -87,3 +114,4 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchHadith();
     fetchDua();
 });
+
