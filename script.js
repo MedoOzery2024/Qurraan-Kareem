@@ -50,34 +50,82 @@ quranSurahSelector && quranSurahSelector.addEventListener('change', () => {
 window.addEventListener('DOMContentLoaded', loadQuranSurahs);
 
 // ----------- الأحاديث النبوية API ---------
-// جلب كتب الحديث
-fetch('https://api.hadith.gading.dev/books')
-  .then(res => res.json())
-  .then(data => {
-    // عرض الكتب في select
-    // data.data = [{id: "bukhari", name: "صحيح البخاري"}, ...]
-  });
+async function getHadithFromFawazahmed0(edition = "ara-bukhari", hadithNumber = 1) {
+    const url = `https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/${edition}/${hadithNumber}.json`;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        if (data && data.hadith) {
+            console.log(`\nحديث من fawazahmed0/hadith-api (${edition}):`);
+            console.log(`الكتاب: ${edition}, رقم الحديث: ${hadithNumber}`);
+            console.log(`الحديث: ${data.hadith}`);
+        } else {
+            console.log("لم يتم العثور على الحديث أو بيانات غير صالحة.");
+        }
+    } catch (error) {
+        console.error("حدث خطأ في جلب الحديث:", error);
+    }
+}
 
-// عند اختيار كتاب:
-fetch('https://api.hadith.gading.dev/books/bukhari?range=1-10')
-  .then(res => res.json())
-  .then(data => {
-    // data.data.hadiths = [{number: 1, arab: "...", id: 1}, ...]
-  });
-
-// عند اختيار حديث:
-fetch('https://api.hadith.gading.dev/books/bukhari/1')
-  .then(res => res.json())
-  .then(data => {
-    // data.data.contents.arab
-  });
+// مثال: الحصول على الحديث الأول من صحيح البخاري (بالعربية)
+getHadithFromFawazahmed0("ara-bukhari", 1);
+getHadithFromFawazahmed0("ara-bukhari", 2);
 // ----------- الأذكار والأدعية -----------
-// جلب أذكار الصباح
-fetch('https://api.hadith.gading.dev/')
-  .then(res => res.json())
-  .then(data => {
-    const morningAzkar = data.content; // مصفوفة الأذكار
-  });
+
+async function getQuranicDuasFromAlQuranVip() {
+    const url = "https://alquran.vip/APIs/duas";
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        if (data && data.quran_duas) {
+            console.log("\nأدعية قرآنية من AlQuran.vip:");
+            data.quran_duas.forEach(dua => {
+                console.log(`ID: ${dua.id}`);
+                console.log(`النص: ${dua.text}`);
+                console.log("-".repeat(30));
+            });
+        } else {
+            console.log("لم يتم العثور على أدعية قرآنية أو بيانات غير صالحة.");
+        }
+    } catch (error) {
+        console.error("حدث خطأ في جلب الأدعية القرآنية:", error);
+    }
+}
+
+// قد لا يكون هذا المسار موجودًا للأذكار اليومية بشكل منفصل
+// عادةً ما تكون الأذكار جزءًا من API أكبر أو ضمن نفس بيانات الأدعية
+async function getDailyAzkarFromAlQuranVip() {
+    const url = "https://alquran.vip/APIs/duas"; // قد تحتاج للبحث عن مسار specific للأذكار
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        if (data && data.home_azkar) { // تحقق إذا كان المفتاح 'home_azkar' موجودًا
+            console.log("\nأذكار يومية من AlQuran.vip (إذا كانت متاحة):");
+            data.home_azkar.forEach(azkar => {
+                console.log(`ID: ${azkar.id}`);
+                console.log(`النص: ${azkar.text}`);
+                console.log(`العدد: ${azkar.count}`);
+                console.log("-".repeat(30));
+            });
+        } else {
+            console.log("لم يتم العثور على أذكار يومية أو بيانات غير صالحة.");
+        }
+    } catch (error) {
+        console.error("حدث خطأ في جلب الأذكار اليومية:", error);
+    }
+}
+
+getQuranicDuasFromAlQuranVip();
+getDailyAzkarFromAlQuranVip();
 // ----------- مواقيت الصلاة API -----------
 const cityInput = document.getElementById('city-input');
 const getPrayerBtn = document.getElementById('get-prayer-times');
