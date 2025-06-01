@@ -3,159 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فإني قريب</title>
+    <title>فأني قريب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕌</text></svg>">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo-container">
-                    <div class="logo">
-                        <i class="fas fa-mosque"></i>
-                    </div>
-                    <div class="header-text">
-                        <h1>فإني قريب</h1>
-                        <p>موقع إسلامي شامل القرآن، الحديث، الأذكار، الأدعية، مواقيت الصلاة والسبحة الإلكترونية</p>
-                        <span class="developer">تصميم المبرمج: محمود محمد محمود أبو الفتوح احمد العزيري</span>
-                    </div>
-                </div>
-            </div>
+    <header class="header">
+        <div class="logo">
+            <i class="fas fa-mosque"></i>
         </div>
+        <h1>فأني قريب</h1>
+        <p>مبرمج الموقع: محمود محمد محمود ابو الفتوح احمد العزيري</p>
     </header>
-    
-    <nav>
-        <div class="container">
-            <div class="nav-container">
-                <button type="button" class="nav-button active" onclick="showSection('quran')">
-                    <i class="fas fa-book-quran"></i> القرآن الكريم
-                </button>
-                <button type="button" class="nav-button" onclick="showSection('hadith')">
-                    <i class="fas fa-book"></i> الأحاديث النبوية
-                </button>
-                <button type="button" class="nav-button" onclick="showSection('azkar')">
-                    <i class="fas fa-praying-hands"></i> الأذكار والأدعية
-                </button>
-                <button type="button" class="nav-button" onclick="showSection('prayer')">
-                    <i class="fas fa-clock"></i> مواقيت الصلاة
-                </button>
-                <button type="button" class="nav-button" onclick="showSection('sebha')">
-                    <i class="fas fa-hands-praying"></i> السبحة الإلكترونية
-                </button>
-            </div>
-        </div>
+
+    <nav class="nav">
+        <ul class="nav-list">
+            <li><a href="#quran">القرآن الكريم</a></li>
+            <li><a href="#hadith">الأحاديث النبوية</a></li>
+            <li><a href="#dua">الأدعية والأذكار</a></li>
+            <li><a href="#prayer-times">مواعيد الصلاة</a></li>
+            <li><a href="#tasbeeh">السبحة الإلكترونية</a></li>
+        </ul>
     </nav>
-    
-    <main>
-        <div class="container">
-            <!-- القرآن الكريم Section -->
-            <section id="quran" class="content-section active">
-                <h2><i class="fas fa-book-quran"></i> القرآن الكريم</h2>
-                <div class="section-content">
-                    <div class="surah-container">
-                        <div class="surah-list" id="surah-list">
-                            <!-- Surah list will be loaded here -->
-                        </div>
-                        <div class="surah-details" id="surah-details">
-                            <div class="surah-header">
-                                <div class="surah-name">اختر سورة</div>
-                                <div class="surah-info">تلاوة وتدبر كلام الله العزيز</div>
-                            </div>
-                            <p class="text-center">الرجاء اختيار سورة من القائمة لعرض آياتها وتفسيرها</p>
-                        </div>
+
+    <main class="main-content">
+        <section id="quran" class="section">
+            <h2 class="section-title">القرآن الكريم</h2>
+            <div class="content">
+                <div class="quran-verse">
+                    <p>بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+                    <p>الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</p>
+                </div>
+                <!-- سيتم إضافة المزيد من الآيات هنا -->
+            </div>
+        </section>
+
+        <section id="hadith" class="section">
+            <h2 class="section-title">الأحاديث النبوية</h2>
+            <div class="content">
+                <div class="hadith-text">
+                    <p>عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم:</p>
+                    <p>"إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى..."</p>
+                </div>
+                <!-- سيتم إضافة المزيد من الأحاديث هنا -->
+            </div>
+        </section>
+
+        <section id="dua" class="section">
+            <h2 class="section-title">الأدعية والأذكار</h2>
+            <div class="content">
+                <div class="dua-text">
+                    <p>اللَّهُمَّ أَنْتَ رَبِّي لا إِلَهَ إِلا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ...</p>
+                </div>
+                <!-- سيتم إضافة المزيد من الأدعية هنا -->
+            </div>
+        </section>
+
+        <section id="prayer-times" class="section">
+            <h2 class="section-title">مواعيد الصلاة</h2>
+            <div class="prayer-times-container">
+                <div class="location-search">
+                    <input type="text" id="city-input" placeholder="أدخل اسم المدينة">
+                    <button id="search-btn">بحث</button>
+                </div>
+                
+                <div class="dates">
+                    <div id="hijri-date"></div>
+                    <div id="gregorian-date"></div>
+                </div>
+                
+                <div class="prayer-grid">
+                    <div class="prayer-card" id="fajr">
+                        <h3 class="prayer-name">الفجر</h3>
+                        <div class="time">--:--</div>
+                    </div>
+                    <div class="prayer-card" id="sunrise">
+                        <h3 class="prayer-name">الشروق</h3>
+                        <div class="time">--:--</div>
+                    </div>
+                    <div class="prayer-card" id="dhuhr">
+                        <h3 class="prayer-name">الظهر</h3>
+                        <div class="time">--:--</div>
+                    </div>
+                    <div class="prayer-card" id="asr">
+                        <h3 class="prayer-name">العصر</h3>
+                        <div class="time">--:--</div>
+                    </div>
+                    <div class="prayer-card" id="maghrib">
+                        <h3 class="prayer-name">المغرب</h3>
+                        <div class="time">--:--</div>
+                    </div>
+                    <div class="prayer-card" id="isha">
+                        <h3 class="prayer-name">العشاء</h3>
+                        <div class="time">--:--</div>
                     </div>
                 </div>
-            </section>
-            
-            <!-- الأحاديث النبوية Section -->
-            <section id="hadith" class="content-section">
-                <h2><i class="fas fa-book"></i> الأحاديث النبوية الشريفة</h2>
-                <div class="section-content">
-                    <div class="form-row">
-                        <select id="hadith-book">
-                            <option value="bukhari">صحيح البخاري</option>
-                            <option value="muslim">صحيح مسلم</option>
-                            <option value="tirmidhi">سنن الترمذي</option>
-                            <option value="nasai">سنن النسائي</option>
-                            <option value="abudawud">سنن أبي داود</option>
-                            <option value="ibnmajah">سنن ابن ماجه</option>
-                        </select>
-                        <button type="button" id="load-hadith">
-                            <i class="fas fa-sync"></i> عرض الأحاديث
-                        </button>
-                    </div>
-                    <div class="hadith-container" id="hadith-container">
-                        <!-- Hadiths will be loaded here -->
-                    </div>
-                    <div class="loader" id="hadith-loader"></div>
-                </div>
-            </section>
-            
-            <!-- الأذكار والأدعية Section -->
-            <section id="azkar" class="content-section">
-                <h2><i class="fas fa-praying-hands"></i> الأذكار والأدعية</h2>
-                <div class="section-content">
-                    <div class="azkar-grid" id="azkar-container">
-                        <!-- Azkar will be loaded here -->
-                    </div>
-                    <div class="loader" id="azkar-loader"></div>
-                </div>
-            </section>
-            
-            <!-- مواقيت الصلاة Section -->
-            <section id="prayer" class="content-section">
-                <h2><i class="fas fa-clock"></i> مواقيت الصلاة</h2>
-                <div class="section-content">
-                    <div class="form-row">
-                        <input type="text" id="city-input" placeholder="ادخل اسم المدينة">
-                        <button type="button" id="get-prayer-times">
-                            <i class="fas fa-search"></i> عرض المواقيت
-                        </button>
-                    </div>
-                    <div class="location" id="prayer-location">القاهرة، مصر</div>
-                    <div class="prayer-times-container" id="prayer-times">
-                        <!-- Prayer times will be loaded here -->
-                    </div>
-                    <div class="loader" id="prayer-loader"></div>
-                </div>
-            </section>
-            
-            <!-- السبحة الإلكترونية Section -->
-            <section id="sebha" class="content-section">
-                <h2><i class="fas fa-hands-praying"></i> السبحة الإلكترونية</h2>
-                <div class="section-content">
-                    <div class="sebha-container">
-                        <div class="sebha-circle" id="sebha-circle">
-                            <div class="sebha-count" id="sebha-count">0</div>
-                        </div>
-                        <select id="sebha-type" class="form-group">
-                            <option> سبحان الله وبحمده سبحان الله العظيم</option>
-                            <option> الحمد لله يوما وعمرا علي كل حال</option>
-                            <option>الله أكبر</option>
-                            <option>لا إله إلا الله</option>
-                            <option>أستغفر الله</option>
-                            <option>لا حول ولا قوة إلا بالله</option>
-                            <option>اللهم صلي علي النبي</option>
-                        </select>
-                        <div class="sebha-actions">
-                            <button type="button" class="sebha-btn" id="sebha-increment">تسبيح</button>
-                            <button type="button" class="sebha-btn reset" id="sebha-reset">إعادة</button>
-                        </div>
+                
+                <div class="next-prayer">
+                    <h3>الصلاة القادمة</h3>
+                    <div id="next-prayer-info">
+                        <p>جاري التحميل...</p>
                     </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
+
+        <section id="tasbeeh" class="section">
+            <h2 class="section-title">السبحة الإلكترونية</h2>
+            <div class="content">
+                <!-- سيتم إضافة محتوى السبحة الإلكترونية هنا -->
+            </div>
+        </section>
     </main>
-    
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 فإني قريب | جميع الحقوق محفوظة</p>
+
+    <footer class="footer">
+        <p>جميع الحقوق محفوظة © 2025</p>
+        <div class="developer-info">
+            تم التطوير بواسطة: محمود محمد محمود أبو الفتوح أحمد العزيري
         </div>
     </footer>
-    
+
     <script src="script.js"></script>
 </body>
 </html>
