@@ -1,4 +1,62 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // إضافة الساعة الرقمية والتاريخ في أعلى الصفحة
+    const header = document.querySelector('.header');
+    const clockContainer = document.createElement('div');
+    clockContainer.className = 'digital-clock-container';
+    clockContainer.innerHTML = `
+        <div class="clock-section">
+            <div class="digital-clock">
+                <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+                <span id="period">AM</span>
+            </div>
+            <div class="current-date">
+                <div id="gregorian-date-display"></div>
+                <div id="hijri-date-display"></div>
+                <div id="current-day"></div>
+            </div>
+        </div>
+    `;
+    header.insertBefore(clockContainer, header.firstChild);
+
+    // تحديث الساعة والتاريخ
+    function updateClock() {
+        const now = new Date();
+        
+        // تحديث الساعة بتوقيت 12 ساعة
+        let hours = now.getHours();
+        const period = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // تحويل 0 إلى 12
+        
+        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').textContent = now.getMinutes().toString().padStart(2, '0');
+        document.getElementById('seconds').textContent = now.getSeconds().toString().padStart(2, '0');
+        document.getElementById('period').textContent = period;
+
+        // تحديث التاريخ الميلادي
+        const day = now.getDate().toString().padStart(2, '0');
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const year = now.getFullYear();
+        const gregorianDate = `${day}/${month}/${year}`;
+        document.getElementById('gregorian-date-display').textContent = `التاريخ الميلادي: ${gregorianDate}`;
+
+        // تحديث التاريخ الهجري
+        const hijriDate = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        }).format(now);
+        document.getElementById('hijri-date-display').textContent = `التاريخ الهجري: ${hijriDate}`;
+
+        // تحديث اليوم الحالي
+        const days = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+        document.getElementById('current-day').textContent = `اليوم: ${days[now.getDay()]}`;
+    }
+
+    // تحديث الساعة كل ثانية
+    setInterval(updateClock, 1000);
+    updateClock(); // تحديث فوري عند تحميل الصفحة
+
     // Tasbeeh functionality
     const tasbeehSection = document.getElementById('tasbeeh');
     const content = tasbeehSection.querySelector('.content');
@@ -504,4 +562,614 @@ document.addEventListener('DOMContentLoaded', function() {
     loadQuran();
     loadHadith();
     loadDuas();
+
+    // قسم الفقه والشريعة
+    const fiqhSection = document.getElementById('fiqh');
+    const categoryButtons = fiqhSection.querySelectorAll('.category-btn');
+    const searchInput = document.getElementById('fiqh-search');
+    const searchButton = document.getElementById('search-fiqh-btn');
+    const lessonsContainer = document.getElementById('lessons-container');
+    const faqContainer = document.getElementById('faq-container');
+
+    // محتوى الفقه والشريعة
+    const fiqhContent = {
+        worship: [
+            {
+                title: 'أحكام الطهارة',
+                content: 'تعريف الطهارة، أنواع المياه، أحكام الوضوء، الغسل، التيمم، النجاسات وكيفية تطهيرها',
+                details: [
+                    'تعريف الطهارة: هي إزالة النجاسة أو رفع الحدث',
+                    'أنواع المياه: طهور، طاهر، نجس',
+                    'أحكام الوضوء: فروضه، سننه، نواقضه',
+                    'الغسل: موجباته، صفته، أحكامه',
+                    'التيمم: شروطه، صفته، أحكامه',
+                    'النجاسات: أنواعها، كيفية تطهيرها'
+                ]
+            },
+            {
+                title: 'أحكام الصلاة',
+                content: 'شروط الصلاة، أركان الصلاة، واجبات الصلاة، سنن الصلاة، مبطلات الصلاة، صلاة الجماعة',
+                details: [
+                    'شروط الصلاة: الإسلام، العقل، التمييز، رفع الحدث، إزالة النجاسة، ستر العورة، دخول الوقت، استقبال القبلة',
+                    'أركان الصلاة: القيام، تكبيرة الإحرام، قراءة الفاتحة، الركوع، السجود، التشهد الأخير',
+                    'واجبات الصلاة: التكبيرات، التسبيح في الركوع والسجود، التشهد الأول',
+                    'سنن الصلاة: رفع اليدين، وضع اليمين على الشمال، دعاء الاستفتاح',
+                    'مبطلات الصلاة: الكلام، الأكل، الشرب، الضحك، الحركة الكثيرة',
+                    'صلاة الجماعة: فضلها، شروطها، أحكامها'
+                ]
+            },
+            {
+                title: 'أحكام الصيام',
+                content: 'شروط الصيام، أركان الصيام، مبطلات الصيام، صيام التطوع، قضاء الصيام، كفارة الصيام',
+                details: [
+                    'شروط الصيام: الإسلام، العقل، البلوغ، القدرة، الإقامة، الصحة',
+                    'أركان الصيام: النية، الإمساك عن المفطرات',
+                    'مبطلات الصيام: الأكل والشرب عمداً، الجماع، القيء عمداً، خروج دم الحيض أو النفاس، الردة عن الإسلام',
+                    'صيام التطوع: فضله، أنواعه، أحكامه',
+                    'قضاء الصيام: شروطه، أحكامه، وقته',
+                    'كفارة الصيام: أنواعها، أحكامها، شروطها'
+                ]
+            },
+            {
+                title: 'أحكام الزكاة',
+                content: 'شروط وجوب الزكاة، الأموال التي تجب فيها الزكاة، نصاب الزكاة، مصارف الزكاة',
+                details: [
+                    'شروط وجوب الزكاة: الإسلام، الحرية، ملك النصاب، تمام الملك، حولان الحول',
+                    'الأموال التي تجب فيها الزكاة: الذهب، الفضة، الأنعام، الزروع، الثمار، عروض التجارة',
+                    'نصاب الزكاة: مقداره، أحكامه، شروطه',
+                    'مصارف الزكاة: الفقراء، المساكين، العاملون عليها، المؤلفة قلوبهم، في الرقاب، الغارمون، في سبيل الله، ابن السبيل'
+                ]
+            },
+            {
+                title: 'أحكام الحج',
+                content: 'شروط وجوب الحج، أركان الحج، واجبات الحج، محظورات الإحرام، أنواع النسك',
+                details: [
+                    'شروط وجوب الحج: الإسلام، العقل، البلوغ، الحرية، الاستطاعة',
+                    'أركان الحج: الإحرام، الوقوف بعرفة، طواف الإفاضة، السعي',
+                    'واجبات الحج: الإحرام من الميقات، المبيت بمزدلفة، رمي الجمرات، الحلق أو التقصير',
+                    'محظورات الإحرام: لبس المخيط، تغطية الرأس، حلق الشعر، تقليم الأظافر، الطيب',
+                    'أنواع النسك: التمتع، القران، الإفراد'
+                ]
+            }
+        ],
+        transactions: [
+            {
+                title: 'أحكام البيع والشراء',
+                content: 'شروط البيع، أركان البيع، أنواع البيوع المحرمة، الخيارات في البيع، الربا وأحكامه',
+                details: [
+                    'شروط البيع: التراضي، الأهلية، الملكية، القدرة على التسليم',
+                    'أركان البيع: العاقدان، المعقود عليه، الصيغة',
+                    'أنواع البيوع المحرمة: بيع الغرر، بيع المزابنة، بيع المحاقلة، بيع الملامسة',
+                    'الخيارات في البيع: خيار المجلس، خيار الشرط، خيار العيب',
+                    'الربا: أنواعه، أحكامه، عقوباته'
+                ]
+            },
+            {
+                title: 'أحكام الإجارة',
+                content: 'شروط الإجارة، حقوق المؤجر والمستأجر، الإجارة المنتهية بالتمليك، الإجارة المشتركة',
+                details: [
+                    'شروط الإجارة: التراضي، الأهلية، المنفعة، الأجرة',
+                    'حقوق المؤجر: استيفاء الأجرة، حفظ العين المؤجرة',
+                    'حقوق المستأجر: الانتفاع بالعين، ضمان العين',
+                    'الإجارة المنتهية بالتمليك: شروطها، أحكامها',
+                    'الإجارة المشتركة: أنواعها، أحكامها'
+                ]
+            },
+            {
+                title: 'أحكام الشركة',
+                content: 'أنواع الشركات، شروط الشركة، حقوق الشركاء، حل الشركة، المسؤولية في الشركة',
+                details: [
+                    'أنواع الشركات: شركة العنان، شركة المفاوضة، شركة الأبدان، شركة الوجوه',
+                    'شروط الشركة: التراضي، الأهلية، رأس المال، العمل',
+                    'حقوق الشركاء: المشاركة في الربح، المشاركة في الإدارة',
+                    'حل الشركة: أسبابها، أحكامها',
+                    'المسؤولية في الشركة: أنواعها، حدودها'
+                ]
+            },
+            {
+                title: 'أحكام القرض',
+                content: 'شروط القرض، حقوق المقرض والمقترض، القرض الحسن، الربا في القروض',
+                details: [
+                    'شروط القرض: التراضي، الأهلية، المالية',
+                    'حقوق المقرض: استرداد القرض، ضمان القرض',
+                    'حقوق المقترض: الانتفاع بالقرض، ضمان القرض',
+                    'القرض الحسن: فضله، أحكامه',
+                    'الربا في القروض: أنواعه، أحكامه، عقوباته'
+                ]
+            }
+        ],
+        family: [
+            {
+                title: 'أحكام النكاح',
+                content: 'شروط النكاح، أركان النكاح، المحرمات في النكاح، حقوق الزوجين، الطلاق وأحكامه',
+                details: [
+                    'شروط النكاح: التراضي، الأهلية، الولي، الشهود، الصداق',
+                    'أركان النكاح: الزوجان، الصيغة، الولي، الشهود',
+                    'المحرمات في النكاح: المحرمات بالنسب، المحرمات بالرضاع، المحرمات بالمصاهرة',
+                    'حقوق الزوجين: حقوق الزوج، حقوق الزوجة',
+                    'الطلاق: أنواعه، أحكامه، شروطه'
+                ]
+            },
+            {
+                title: 'أحكام الميراث',
+                content: 'أسباب الإرث، موانع الإرث، أصحاب الفروض، العصبات، الحجب، التوريث',
+                details: [
+                    'أسباب الإرث: النسب، الزوجية، الولاء',
+                    'موانع الإرث: القتل، اختلاف الدين، الرق',
+                    'أصحاب الفروض: الزوج، الزوجة، الأب، الأم، البنت، الأخت',
+                    'العصبات: العصبة بالنفس، العصبة بالغير، العصبة مع الغير',
+                    'الحجب: حجب حرمان، حجب نقصان',
+                    'التوريث: كيفية توزيع التركة'
+                ]
+            },
+            {
+                title: 'أحكام النفقة',
+                content: 'نفقة الزوجة، نفقة الأولاد، نفقة الأقارب، شروط وجوب النفقة، تقدير النفقة',
+                details: [
+                    'نفقة الزوجة: شروطها، مقدارها، أحكامها',
+                    'نفقة الأولاد: شروطها، مقدارها، أحكامها',
+                    'نفقة الأقارب: شروطها، مقدارها، أحكامها',
+                    'شروط وجوب النفقة: الحاجة، القدرة، القرابة',
+                    'تقدير النفقة: كيفية تقديرها، عوامل التقدير'
+                ]
+            }
+        ],
+        criminal: [
+            {
+                title: 'أحكام الحدود',
+                content: 'حد الزنا، حد السرقة، حد القذف، حد شرب الخمر، حد الحرابة، حد الردة',
+                details: [
+                    'حد الزنا: شروطه، عقوبته، أحكامه',
+                    'حد السرقة: شروطه، عقوبته، أحكامه',
+                    'حد القذف: شروطه، عقوبته، أحكامه',
+                    'حد شرب الخمر: شروطه، عقوبته، أحكامه',
+                    'حد الحرابة: شروطه، عقوبته، أحكامه',
+                    'حد الردة: شروطه، عقوبته، أحكامه'
+                ]
+            },
+            {
+                title: 'أحكام القصاص',
+                content: 'شروط القصاص، القصاص في النفس، القصاص في الأطراف، الدية وأحكامها',
+                details: [
+                    'شروط القصاص: المساواة، الأهلية، التراضي',
+                    'القصاص في النفس: شروطه، أحكامه',
+                    'القصاص في الأطراف: شروطه، أحكامه',
+                    'الدية: أنواعها، مقدارها، أحكامها'
+                ]
+            },
+            {
+                title: 'أحكام التعزير',
+                content: 'تعريف التعزير، حالات التعزير، أنواع التعزير، تقدير التعزير',
+                details: [
+                    'تعريف التعزير: هو العقوبة غير المقدرة شرعاً',
+                    'حالات التعزير: الجرائم التي ليس فيها حد ولا كفارة',
+                    'أنواع التعزير: التعزير بالقتل، التعزير بالجلد، التعزير بالحبس',
+                    'تقدير التعزير: كيفية تقديره، عوامل التقدير'
+                ]
+            }
+        ]
+    };
+
+    // الأسئلة الشائعة
+    const faqContent = [
+        {
+            question: 'ما هي شروط صحة الصلاة؟',
+            answer: 'شروط صحة الصلاة هي: الإسلام، العقل، التمييز، رفع الحدث، إزالة النجاسة، ستر العورة، دخول الوقت، استقبال القبلة، النية.'
+        },
+        {
+            question: 'ما هي أركان الصيام؟',
+            answer: 'أركان الصيام هي: النية، الإمساك عن المفطرات من طلوع الفجر إلى غروب الشمس.'
+        },
+        {
+            question: 'ما هي شروط وجوب الزكاة؟',
+            answer: 'شروط وجوب الزكاة هي: الإسلام، الحرية، ملك النصاب، تمام الملك، حولان الحول، سقوط الدين.'
+        },
+        {
+            question: 'ما هي أركان النكاح؟',
+            answer: 'أركان النكاح هي: الصيغة (الإيجاب والقبول)، الزوجان، الولي، الشهود.'
+        },
+        {
+            question: 'ما هي أنواع البيوع المحرمة؟',
+            answer: 'من أنواع البيوع المحرمة: بيع الغرر، بيع المزابنة، بيع المحاقلة، بيع الملامسة، بيع المنابذة، بيع الحصاة.'
+        }
+    ];
+
+    // تحميل الدروس حسب الفئة
+    function loadLessons(category) {
+        try {
+            console.log('Loading category:', category);
+            const lessons = fiqhContent[category] || [];
+            displayLessons(lessons);
+        } catch (error) {
+            console.error('Error loading lessons:', error);
+            showError('حدث خطأ في تحميل الدروس');
+        }
+    }
+
+    // عرض الدروس
+    function displayLessons(lessons) {
+        if (!lessonsContainer) {
+            console.error('Lessons container not found');
+            return;
+        }
+
+        lessonsContainer.innerHTML = '';
+        if (lessons.length === 0) {
+            lessonsContainer.innerHTML = '<p>لا توجد دروس متاحة لهذه الفئة</p>';
+            return;
+        }
+
+        lessons.forEach(lesson => {
+            const lessonCard = document.createElement('div');
+            lessonCard.className = 'lesson-card';
+            lessonCard.innerHTML = `
+                <h4>${lesson.title}</h4>
+                <div class="lesson-content">
+                    <p class="lesson-summary">${lesson.content}</p>
+                    <div class="lesson-details">
+                        <h5>التفاصيل:</h5>
+                        <ul>
+                            ${lesson.details.map(detail => `<li>${detail}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+            lessonsContainer.appendChild(lessonCard);
+        });
+
+        // إضافة مستمعي الأحداث للدروس
+        document.querySelectorAll('.lesson-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('active');
+            });
+        });
+    }
+
+    // تحميل الأسئلة الشائعة
+    function loadFAQ() {
+        try {
+            displayFAQ(faqContent);
+        } catch (error) {
+            console.error('Error loading FAQ:', error);
+            showError('حدث خطأ في تحميل الأسئلة الشائعة');
+        }
+    }
+
+    // عرض الأسئلة الشائعة
+    function displayFAQ(faqs) {
+        faqContainer.innerHTML = '';
+        faqs.forEach(faq => {
+            const faqItem = document.createElement('div');
+            faqItem.className = 'faq-item';
+            faqItem.innerHTML = `
+                <h4>${faq.question}</h4>
+                <div class="faq-answer">
+                    <p>${faq.answer}</p>
+                </div>
+            `;
+            faqContainer.appendChild(faqItem);
+        });
+
+        // إضافة مستمعي الأحداث للأسئلة
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    }
+
+    // البحث في الفقه والشريعة
+    function searchFiqh(query) {
+        try {
+            const results = [];
+            Object.values(fiqhContent).forEach(category => {
+                category.forEach(lesson => {
+                    if (lesson.title.includes(query) || lesson.content.includes(query)) {
+                        results.push(lesson);
+                    }
+                });
+            });
+            displaySearchResults(results);
+        } catch (error) {
+            console.error('Error searching:', error);
+            showError('حدث خطأ في البحث');
+        }
+    }
+
+    // عرض نتائج البحث
+    function displaySearchResults(results) {
+        lessonsContainer.innerHTML = '';
+        if (results.length === 0) {
+            lessonsContainer.innerHTML = '<p>لم يتم العثور على نتائج</p>';
+            return;
+        }
+
+        results.forEach(result => {
+            const resultCard = document.createElement('div');
+            resultCard.className = 'lesson-card';
+            resultCard.innerHTML = `
+                <h4>${result.title}</h4>
+                <div class="lesson-content">
+                    <p class="lesson-summary">${result.content}</p>
+                    <div class="lesson-details">
+                        <h5>التفاصيل:</h5>
+                        <ul>
+                            ${result.details.map(detail => `<li>${detail}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+            lessonsContainer.appendChild(resultCard);
+        });
+
+        // إضافة مستمعي الأحداث للنتائج
+        document.querySelectorAll('.lesson-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('active');
+            });
+        });
+    }
+
+    // إظهار رسالة الخطأ
+    function showError(message) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.textContent = message;
+        lessonsContainer.innerHTML = '';
+        lessonsContainer.appendChild(errorDiv);
+    }
+
+    // إضافة مستمعي الأحداث للأزرار
+    if (categoryButtons) {
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Button clicked:', this.dataset.category);
+
+                // إزالة الفئة النشطة من جميع الأزرار
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                // إضافة الفئة النشطة للزر المحدد
+                this.classList.add('active');
+                
+                const category = this.dataset.category;
+                loadLessons(category);
+            });
+        });
+    } else {
+        console.error('Category buttons not found');
+    }
+
+    searchButton.addEventListener('click', () => {
+        const query = searchInput.value.trim();
+        if (query) {
+            searchFiqh(query);
+        }
+    });
+
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            const query = searchInput.value.trim();
+            if (query) {
+                searchFiqh(query);
+            }
+        }
+    });
+
+    // تحميل المحتوى الأولي
+    loadLessons('worship');
+    loadFAQ();
+
+    // قسم إمساكية رمضان
+    const ramadanSection = document.getElementById('ramadan');
+    const yearSelect = document.getElementById('ramadan-year-select');
+    const citySelect = document.getElementById('ramadan-city-select');
+    const ramadanTable = document.getElementById('ramadan-table');
+    const ramadanDate = document.getElementById('ramadan-date');
+
+    // قائمة المدن المصرية
+    const cities = [
+        'القاهرة', 'الإسكندرية', 'الجيزة', 'شبرا الخيمة', 'بورسعيد',
+        'السويس', 'طنطا', 'المنصورة', 'أسيوط', 'الزقازيق',
+        'دمياط', 'الغردقة', 'شرم الشيخ', 'أسوان', 'الأقصر'
+    ];
+
+    // ملء قائمة المدن
+    cities.forEach(city => {
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        citySelect.appendChild(option);
+    });
+
+    // ملء قائمة السنوات (من 2024 إلى 2030)
+    const currentYear = new Date().getFullYear();
+    for (let year = currentYear; year <= currentYear + 6; year++) {
+        const option = document.createElement('option');
+        option.value = year;
+        option.textContent = year;
+        yearSelect.appendChild(option);
+    }
+
+    // تحويل التاريخ الميلادي إلى هجري
+    function gregorianToHijri(date) {
+        // استخدام مكتبة moment-hijri للتحويل
+        const hijriDate = moment(date).format('iYYYY/iM/iD');
+        return hijriDate;
+    }
+
+    // حساب مواعيد الصلاة لشهر رمضان
+    async function calculateRamadanTimes(year, city) {
+        try {
+            const ramadanStart = new Date(year, 2, 10); // تاريخ بداية رمضان (تقريبي)
+            const ramadanEnd = new Date(year, 3, 9); // تاريخ نهاية رمضان (تقريبي)
+            
+            let tableHTML = '';
+            
+            for (let date = new Date(ramadanStart); date <= ramadanEnd; date.setDate(date.getDate() + 1)) {
+                const response = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=${encodeURIComponent(city)}&country=EG&method=4&date=${moment(date).format('DD-MM-YYYY')}`);
+                const data = await response.json();
+                
+                if (data.code === 200) {
+                    const timings = data.data.timings;
+                    const hijriDate = gregorianToHijri(date);
+                    
+                    // حساب وقت الإمساك (قبل الفجر بـ 10 دقائق)
+                    const fajrTime = moment(timings.Fajr, 'HH:mm');
+                    const imsakTime = fajrTime.subtract(10, 'minutes').format('HH:mm');
+                    
+                    tableHTML += `
+                        <tr>
+                            <td>${moment(date).format('DD/MM/YYYY')}</td>
+                            <td>${hijriDate}</td>
+                            <td>${moment(date).format('DD/MM/YYYY')}</td>
+                            <td>${imsakTime}</td>
+                            <td>${timings.Fajr}</td>
+                            <td>${timings.Sunrise}</td>
+                            <td>${timings.Dhuhr}</td>
+                            <td>${timings.Asr}</td>
+                            <td>${timings.Maghrib}</td>
+                            <td>${timings.Isha}</td>
+                        </tr>
+                    `;
+                }
+            }
+            
+            ramadanTable.querySelector('tbody').innerHTML = tableHTML;
+            
+            // تحديث عنوان الإمساكية
+            ramadanDate.innerHTML = `
+                <p>إمساكية شهر رمضان ${year}</p>
+                <p>المدينة: ${city}</p>
+            `;
+        } catch (error) {
+            console.error('Error calculating Ramadan times:', error);
+            ramadanTable.querySelector('tbody').innerHTML = `
+                <tr>
+                    <td colspan="10" class="error-message">
+                        عذراً، حدث خطأ في تحميل مواعيد الإمساكية
+                    </td>
+                </tr>
+            `;
+        }
+    }
+
+    // إضافة دالة للحصول على إحداثيات المدن
+    async function getCityCoordinates(city) {
+        const cityCoordinates = {
+            'القاهرة': { latitude: 30.0444, longitude: 31.2357 },
+            'الإسكندرية': { latitude: 31.2001, longitude: 29.9187 },
+            'الجيزة': { latitude: 30.0131, longitude: 31.2089 },
+            'شبرا الخيمة': { latitude: 30.1304, longitude: 31.2425 },
+            'بورسعيد': { latitude: 31.2667, longitude: 32.3000 },
+            'السويس': { latitude: 29.9668, longitude: 32.5498 },
+            'طنطا': { latitude: 30.7865, longitude: 30.9998 },
+            'المنصورة': { latitude: 31.0409, longitude: 31.3785 },
+            'أسيوط': { latitude: 27.1828, longitude: 31.1828 },
+            'الزقازيق': { latitude: 30.5877, longitude: 31.5020 },
+            'دمياط': { latitude: 31.4167, longitude: 31.8167 },
+            'الغردقة': { latitude: 27.2578, longitude: 33.8116 },
+            'شرم الشيخ': { latitude: 27.9158, longitude: 34.3300 },
+            'أسوان': { latitude: 24.0889, longitude: 32.8998 },
+            'الأقصر': { latitude: 25.6872, longitude: 32.6396 }
+        };
+
+        if (cityCoordinates[city]) {
+            return cityCoordinates[city];
+        } else {
+            // إذا لم يتم العثور على المدينة، نستخدم إحداثيات القاهرة كقيمة افتراضية
+            console.warn(`لم يتم العثور على إحداثيات لمدينة ${city}، سيتم استخدام إحداثيات القاهرة`);
+            return cityCoordinates['القاهرة'];
+        }
+    }
+
+    // تحديث وظائف إمساكية رمضان
+    async function loadRamadanData() {
+        try {
+            const year = document.getElementById('ramadan-year-select').value;
+            const city = document.getElementById('ramadan-city-select').value;
+            
+            // تحديث المحتوى
+            const ramadanContent = document.querySelector('.ramadan-content');
+            ramadanContent.innerHTML = `
+                <div class="ramadan-info-section">
+                    <h3>معلومات عن شهر رمضان ${year}</h3>
+                    <div class="ramadan-cards">
+                        <div class="info-card">
+                            <h4>فضل شهر رمضان</h4>
+                            <p>شهر رمضان هو الشهر التاسع في التقويم الهجري، وهو شهر الصيام عند المسلمين، وفيه ليلة القدر التي هي خير من ألف شهر.</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>أحكام الصيام</h4>
+                            <ul>
+                                <li>شروط وجوب الصيام: الإسلام، البلوغ، العقل، القدرة، الإقامة، الصحة</li>
+                                <li>مبطلات الصيام: الأكل والشرب عمداً، الجماع، القيء عمداً، خروج دم الحيض أو النفاس</li>
+                                <li>كفارة الصيام: إطعام مسكين عن كل يوم أفطر فيه</li>
+                            </ul>
+                        </div>
+                        <div class="info-card">
+                            <h4>أدعية رمضان</h4>
+                            <div class="dua-section">
+                                <h5>دعاء الصيام</h5>
+                                <p>نَوَيْتُ صَوْمَ غَدٍ عَنْ أَدَاءِ فَرْضِ شَهْرِ رَمَضَانَ هَذِهِ السَّنَةِ للهِ تَعَالَى</p>
+                                <h5>دعاء الإفطار</h5>
+                                <p>اللَّهُمَّ لَكَ صُمْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ، ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ، وَثَبَتَ الأَجْرُ إِنْ شَاءَ اللَّهُ</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <h4>نصائح للصائم</h4>
+                            <ul>
+                                <li>تأخير السحور وتعجيل الإفطار</li>
+                                <li>الإكثار من شرب الماء بين الإفطار والسحور</li>
+                                <li>تجنب الأطعمة المالحة والحارة</li>
+                                <li>ممارسة الرياضة الخفيفة قبل الإفطار</li>
+                                <li>النوم الكافي وتجنب السهر</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="ramadan-activities">
+                    <h3>أنشطة رمضانية</h3>
+                    <div class="activity-cards">
+                        <div class="activity-card">
+                            <h4>صلاة التراويح</h4>
+                            <p>صلاة التراويح هي صلاة قيام الليل في رمضان، وتصلى بعد صلاة العشاء، وهي سنة مؤكدة عن النبي صلى الله عليه وسلم.</p>
+                        </div>
+                        <div class="activity-card">
+                            <h4>صدقة الفطر</h4>
+                            <p>صدقة الفطر هي زكاة تجب على كل مسلم قبل صلاة عيد الفطر، وهي طهرة للصائم من اللغو والرفث.</p>
+                        </div>
+                        <div class="activity-card">
+                            <h4>العمرة في رمضان</h4>
+                            <p>العمرة في رمضان تعدل حجة مع النبي صلى الله عليه وسلم، وهي من أفضل الأعمال في هذا الشهر المبارك.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // تحديث عنوان الإمساكية
+            const ramadanDate = document.getElementById('ramadan-date');
+            ramadanDate.innerHTML = `
+                <p>شهر رمضان المبارك ${year}</p>
+                <p>المدينة: ${city}</p>
+            `;
+
+        } catch (error) {
+            console.error('خطأ في تحميل بيانات رمضان:', error);
+            const ramadanContent = document.querySelector('.ramadan-content');
+            ramadanContent.innerHTML = `
+                <div class="error-message">
+                    <p>عذراً، حدث خطأ في تحميل المحتوى</p>
+                    <p class="error-details">${error.message}</p>
+                    <p class="error-help">يرجى المحاولة مرة أخرى</p>
+                </div>
+            `;
+        }
+    }
+
+    // تحديث الإمساكية عند تغيير السنة أو المدينة
+    document.getElementById('ramadan-year-select').addEventListener('change', loadRamadanData);
+    document.getElementById('ramadan-city-select').addEventListener('change', loadRamadanData);
+
+    // تحميل الإمساكية للعام الحالي
+    loadRamadanData();
 });
