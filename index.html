@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فأني قريب</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -19,17 +20,19 @@
 
     <nav class="nav">
         <ul class="nav-list">
-            <li><a href="#quran">القرآن الكريم</a></li>
-            <li><a href="#hadith">الأحاديث النبوية</a></li>
-            <li><a href="#dua">الأدعية والأذكار</a></li>
-            <li><a href="#prayer-times">مواعيد الصلاة</a></li>
-            <li><a href="#tasbeeh">السبحة الإلكترونية</a></li>
+            <li><a href="#quran"><i class="fas fa-book-quran"></i> القرآن الكريم</a></li>
+            <li><a href="#hadith"><i class="fas fa-book-open"></i> الأحاديث النبوية</a></li>
+            <li><a href="#dua"><i class="fas fa-hands-praying"></i> الأدعية والأذكار</a></li>
+            <li><a href="#prayer-times"><i class="fas fa-clock"></i> مواعيد الصلاة</a></li>
+            <li><a href="#ramadan"><i class="fas fa-moon"></i> إمساكية رمضان</a></li>
+            <li><a href="#tasbeeh"><i class="fas fa-circle-dot"></i> السبحة الإلكترونية</a></li>
+            <li><a href="#fiqh"><i class="fas fa-scale-balanced"></i> الفقه والشريعة</a></li>
         </ul>
     </nav>
 
     <main class="main-content">
         <section id="quran" class="section">
-            <h2 class="section-title">القرآن الكريم</h2>
+            <h2 class="section-title"><i class="fas fa-book-quran"></i> القرآن الكريم</h2>
             <div class="content">
                 <div class="quran-verse">
                     <p>بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
@@ -40,7 +43,7 @@
         </section>
 
         <section id="hadith" class="section">
-            <h2 class="section-title">الأحاديث النبوية</h2>
+            <h2 class="section-title"><i class="fas fa-book-open"></i> الأحاديث النبوية</h2>
             <div class="content">
                 <div class="hadith-text">
                     <p>عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم:</p>
@@ -51,7 +54,7 @@
         </section>
 
         <section id="dua" class="section">
-            <h2 class="section-title">الأدعية والأذكار</h2>
+            <h2 class="section-title"><i class="fas fa-hands-praying"></i> الأدعية والأذكار</h2>
             <div class="content">
                 <div class="dua-text">
                     <p>اللَّهُمَّ أَنْتَ رَبِّي لا إِلَهَ إِلا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ...</p>
@@ -61,7 +64,7 @@
         </section>
 
         <section id="prayer-times" class="section">
-            <h2 class="section-title">مواعيد الصلاة</h2>
+            <h2 class="section-title"><i class="fas fa-clock"></i> مواعيد الصلاة</h2>
             <div class="prayer-times-container">
                 <div class="location-search">
                     <input type="text" id="city-input" placeholder="أدخل اسم المدينة">
@@ -109,16 +112,149 @@
             </div>
         </section>
 
+        <section id="ramadan" class="section">
+            <h2 class="section-title"><i class="fas fa-moon"></i> إمساكية رمضان</h2>
+            <div class="ramadan-container">
+                <div class="ramadan-header">
+                    <div class="ramadan-info">
+                        <h3>شهر رمضان المبارك</h3>
+                        <div id="ramadan-date"></div>
+                    </div>
+                    <div class="ramadan-controls">
+                        <select id="ramadan-year-select">
+                            <!-- سيتم ملؤها بالسنوات المتاحة -->
+                        </select>
+                        <select id="ramadan-city-select">
+                            <!-- سيتم ملؤها بالمدن المتاحة -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="ramadan-content">
+                    <div class="imsakiyah-table">
+                        <table id="ramadan-table">
+                            <thead>
+                                <tr>
+                                    <th>اليوم</th>
+                                    <th>التاريخ الهجري</th>
+                                    <th>التاريخ الميلادي</th>
+                                    <th>الإمساك</th>
+                                    <th>الفجر</th>
+                                    <th>الشروق</th>
+                                    <th>الظهر</th>
+                                    <th>العصر</th>
+                                    <th>المغرب</th>
+                                    <th>العشاء</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- سيتم ملؤها بالبيانات -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="ramadan-duas">
+                        <h3>أدعية رمضان</h3>
+                        <div class="dua-cards">
+                            <div class="dua-card">
+                                <h4>دعاء الصيام</h4>
+                                <p class="dua-text">نَوَيْتُ صَوْمَ غَدٍ عَنْ أَدَاءِ فَرْضِ شَهْرِ رَمَضَانَ هَذِهِ السَّنَةِ للهِ تَعَالَى</p>
+                                <p class="dua-meaning">معناه: نويت أن أصوم غداً أداءً لفرض شهر رمضان هذه السنة لله تعالى</p>
+                            </div>
+                            <div class="dua-card">
+                                <h4>دعاء الإفطار</h4>
+                                <p class="dua-text">اللَّهُمَّ لَكَ صُمْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ، ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ، وَثَبَتَ الأَجْرُ إِنْ شَاءَ اللَّهُ</p>
+                                <p class="dua-meaning">معناه: اللهم لك صمت وعلى رزقك أفطرت، ذهب الظمأ وابتلت العروق، وثبت الأجر إن شاء الله</p>
+                            </div>
+                            <div class="dua-card">
+                                <h4>دعاء ليلة القدر</h4>
+                                <p class="dua-text">اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي</p>
+                                <p class="dua-meaning">معناه: اللهم إنك عفو تحب العفو فاعف عني</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ramadan-info-cards">
+                        <div class="info-card">
+                            <h4>أحكام الصيام</h4>
+                            <ul>
+                                <li>شروط وجوب الصيام</li>
+                                <li>مبطلات الصيام</li>
+                                <li>كفارة الصيام</li>
+                                <li>صيام التطوع</li>
+                            </ul>
+                        </div>
+                        <div class="info-card">
+                            <h4>فضائل رمضان</h4>
+                            <ul>
+                                <li>ليلة القدر</li>
+                                <li>صلاة التراويح</li>
+                                <li>صدقة الفطر</li>
+                                <li>العمرة في رمضان</li>
+                            </ul>
+                        </div>
+                        <div class="info-card">
+                            <h4>نصائح للصائم</h4>
+                            <ul>
+                                <li>نظام غذائي صحي</li>
+                                <li>إدارة الوقت</li>
+                                <li>العبادات في رمضان</li>
+                                <li>الاستعداد للعيد</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="tasbeeh" class="section">
-            <h2 class="section-title">السبحة الإلكترونية</h2>
+            <h2 class="section-title"><i class="fas fa-circle-dot"></i> السبحة الإلكترونية</h2>
             <div class="content">
                 <!-- سيتم إضافة محتوى السبحة الإلكترونية هنا -->
+            </div>
+        </section>
+
+        <section id="fiqh" class="section">
+            <h2 class="section-title"><i class="fas fa-scale-balanced"></i> الفقه والشريعة</h2>
+            <div class="content">
+                <div class="fiqh-container">
+                    <div class="fiqh-categories">
+                        <h3>أقسام الفقه</h3>
+                        <div class="category-list">
+                            <button class="category-btn" data-category="worship">العبادات</button>
+                            <button class="category-btn" data-category="transactions">المعاملات</button>
+                            <button class="category-btn" data-category="family">الأحوال الشخصية</button>
+                            <button class="category-btn" data-category="criminal">الحدود والجنايات</button>
+                        </div>
+                    </div>
+
+                    <div class="fiqh-content">
+                        <div class="search-box">
+                            <input type="text" id="fiqh-search" placeholder="ابحث في الفقه والشريعة...">
+                            <button id="search-fiqh-btn"><i class="fas fa-search"></i></button>
+                        </div>
+
+                        <div class="fiqh-lessons">
+                            <h3>منهج الفقه والشريعة</h3>
+                            <div id="lessons-container">
+                                <!-- سيتم تحميل الدروس هنا -->
+                            </div>
+                        </div>
+
+                        <div class="faq-section">
+                            <h3>الأسئلة الشائعة</h3>
+                            <div id="faq-container">
+                                <!-- سيتم تحميل الأسئلة الشائعة هنا -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <p>جميع الحقوق محفوظة © 2025</p>
+        <p>جميع الحقوق محفوظة © 2024</p>
         <div class="developer-info">
             تم التطوير بواسطة: محمود محمد محمود أبو الفتوح أحمد العزيري
         </div>
