@@ -20,6 +20,7 @@
 
     <nav class="nav">
         <ul class="nav-list">
+            <li><a href="#home"><i class="fas fa-home"></i> الرئيسية</a></li>
             <li><a href="#quran"><i class="fas fa-book-quran"></i> القرآن الكريم</a></li>
             <li><a href="#hadith"><i class="fas fa-book-open"></i> الأحاديث النبوية</a></li>
             <li><a href="#dua"><i class="fas fa-hands-praying"></i> الأدعية والأذكار</a></li>
@@ -31,226 +32,288 @@
     </nav>
 
     <main class="main-content">
-        <section id="quran" class="section">
-            <h2 class="section-title"><i class="fas fa-book-quran"></i> القرآن الكريم</h2>
-            <div class="content">
-                <div class="quran-verse">
-                    <p>بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
-                    <p>الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</p>
-                </div>
-                <!-- سيتم إضافة المزيد من الآيات هنا -->
-            </div>
-        </section>
-
-        <section id="hadith" class="section">
-            <h2 class="section-title"><i class="fas fa-book-open"></i> الأحاديث النبوية</h2>
-            <div class="content">
-                <div class="hadith-text">
-                    <p>عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم:</p>
-                    <p>"إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى..."</p>
-                </div>
-                <!-- سيتم إضافة المزيد من الأحاديث هنا -->
-            </div>
-        </section>
-
-        <section id="dua" class="section">
-            <h2 class="section-title"><i class="fas fa-hands-praying"></i> الأدعية والأذكار</h2>
-            <div class="content">
-                <div class="dua-text">
-                    <p>اللَّهُمَّ أَنْتَ رَبِّي لا إِلَهَ إِلا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ...</p>
-                </div>
-                <!-- سيتم إضافة المزيد من الأدعية هنا -->
-            </div>
-        </section>
-
-        <section id="prayer-times" class="section">
-            <h2 class="section-title"><i class="fas fa-clock"></i> مواعيد الصلاة</h2>
-            <div class="prayer-times-container">
-                <div class="location-search">
-                    <input type="text" id="city-input" placeholder="أدخل اسم المدينة">
-                    <button id="search-btn" class="search-btn"><i class="fas fa-search"></i> بحث</button>
-                </div>
-                
-                <div class="dates">
-                    <div id="hijri-date"></div>
-                    <div id="gregorian-date"></div>
-                </div>
-                
-                <div class="prayer-grid">
-                    <div class="prayer-card" id="fajr">
-                        <h3 class="prayer-name">الفجر</h3>
-                        <div class="time">--:--</div>
-                    </div>
-                    <div class="prayer-card" id="sunrise">
-                        <h3 class="prayer-name">الشروق</h3>
-                        <div class="time">--:--</div>
-                    </div>
-                    <div class="prayer-card" id="dhuhr">
-                        <h3 class="prayer-name">الظهر</h3>
-                        <div class="time">--:--</div>
-                    </div>
-                    <div class="prayer-card" id="asr">
-                        <h3 class="prayer-name">العصر</h3>
-                        <div class="time">--:--</div>
-                    </div>
-                    <div class="prayer-card" id="maghrib">
-                        <h3 class="prayer-name">المغرب</h3>
-                        <div class="time">--:--</div>
-                    </div>
-                    <div class="prayer-card" id="isha">
-                        <h3 class="prayer-name">العشاء</h3>
-                        <div class="time">--:--</div>
-                    </div>
-                </div>
-                
-                <div class="next-prayer">
-                    <h3>الصلاة القادمة</h3>
-                    <div id="next-prayer-info">
-                        <p>جاري التحميل...</p>
-                    </div>
+        <!-- البطاقات الرئيسية -->
+        <div class="main-cards" id="home">
+            <div class="main-card" data-section="quran">
+                <div class="card-content">
+                    <i class="fas fa-book-quran card-icon"></i>
+                    <h2 class="card-title">القرآن الكريم</h2>
+                    <p class="card-description">استمع وتصفح القرآن الكريم مع التفسير</p>
                 </div>
             </div>
-        </section>
 
-        <section id="ramadan" class="section">
-            <h2 class="section-title"><i class="fas fa-moon"></i> إمساكية رمضان</h2>
-            <div class="ramadan-container">
-                <div class="ramadan-header">
-                    <div class="ramadan-info">
-                        <h3>شهر رمضان المبارك</h3>
-                        <div id="ramadan-date"></div>
-                    </div>
-                    <div class="ramadan-controls">
-                        <select id="ramadan-year-select">
-                            <!-- سيتم ملؤها بالسنوات المتاحة -->
-                        </select>
-                        <select id="ramadan-city-select">
-                            <!-- سيتم ملؤها بالمدن المتاحة -->
-                        </select>
-                    </div>
+            <div class="main-card" data-section="hadith">
+                <div class="card-content">
+                    <i class="fas fa-book-open card-icon"></i>
+                    <h2 class="card-title">الأحاديث النبوية</h2>
+                    <p class="card-description">مجموعة من الأحاديث النبوية الشريفة</p>
                 </div>
+            </div>
 
-                <div class="ramadan-content">
-                    <div class="imsakiyah-table">
-                        <table id="ramadan-table">
-                            <thead>
-                                <tr>
-                                    <th>اليوم</th>
-                                    <th>التاريخ الهجري</th>
-                                    <th>التاريخ الميلادي</th>
-                                    <th>الإمساك</th>
-                                    <th>الفجر</th>
-                                    <th>الشروق</th>
-                                    <th>الظهر</th>
-                                    <th>العصر</th>
-                                    <th>المغرب</th>
-                                    <th>العشاء</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- سيتم ملؤها بالبيانات -->
-                            </tbody>
-                        </table>
+            <div class="main-card" data-section="dua">
+                <div class="card-content">
+                    <i class="fas fa-hands-praying card-icon"></i>
+                    <h2 class="card-title">الأدعية والأذكار</h2>
+                    <p class="card-description">أدعية وأذكار مختارة من السنة النبوية</p>
+                </div>
+            </div>
+
+            <div class="main-card" data-section="prayer-times">
+                <div class="card-content">
+                    <i class="fas fa-clock card-icon"></i>
+                    <h2 class="card-title">مواعيد الصلاة</h2>
+                    <p class="card-description">مواعيد الصلاة حسب موقعك</p>
+                </div>
+            </div>
+
+            <div class="main-card" data-section="ramadan">
+                <div class="card-content">
+                    <i class="fas fa-moon card-icon"></i>
+                    <h2 class="card-title">إمساكية رمضان</h2>
+                    <p class="card-description">مواعيد الإمساك والإفطار في رمضان</p>
+                </div>
+            </div>
+
+            <div class="main-card" data-section="tasbeeh">
+                <div class="card-content">
+                    <i class="fas fa-circle-dot card-icon"></i>
+                    <h2 class="card-title">السبحة الإلكترونية</h2>
+                    <p class="card-description">سبحة إلكترونية للأذكار</p>
+                </div>
+            </div>
+
+            <div class="main-card" data-section="fiqh">
+                <div class="card-content">
+                    <i class="fas fa-scale-balanced card-icon"></i>
+                    <h2 class="card-title">الفقه والشريعة</h2>
+                    <p class="card-description">أحكام الفقه الإسلامي</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- الأقسام -->
+        <div id="sections-container">
+            <section id="quran" class="section">
+                <h2 class="section-title"><i class="fas fa-book-quran"></i> القرآن الكريم</h2>
+                <div class="content">
+                    <div class="quran-verse">
+                        <p>بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+                        <p>الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</p>
                     </div>
+                    <!-- سيتم إضافة المزيد من الآيات هنا -->
+                </div>
+            </section>
 
-                    <div class="ramadan-duas">
-                        <h3>أدعية رمضان</h3>
-                        <div class="dua-cards">
-                            <div class="dua-card">
-                                <h4>دعاء الصيام</h4>
-                                <p class="dua-text">نَوَيْتُ صَوْمَ غَدٍ عَنْ أَدَاءِ فَرْضِ شَهْرِ رَمَضَانَ هَذِهِ السَّنَةِ للهِ تَعَالَى</p>
-                                <p class="dua-meaning">معناه: نويت أن أصوم غداً أداءً لفرض شهر رمضان هذه السنة لله تعالى</p>
-                            </div>
-                            <div class="dua-card">
-                                <h4>دعاء الإفطار</h4>
-                                <p class="dua-text">اللَّهُمَّ لَكَ صُمْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ، ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ، وَثَبَتَ الأَجْرُ إِنْ شَاءَ اللَّهُ</p>
-                                <p class="dua-meaning">معناه: اللهم لك صمت وعلى رزقك أفطرت، ذهب الظمأ وابتلت العروق، وثبت الأجر إن شاء الله</p>
-                            </div>
-                            <div class="dua-card">
-                                <h4>دعاء ليلة القدر</h4>
-                                <p class="dua-text">اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي</p>
-                                <p class="dua-meaning">معناه: اللهم إنك عفو تحب العفو فاعف عني</p>
-                            </div>
+            <section id="hadith" class="section">
+                <h2 class="section-title"><i class="fas fa-book-open"></i> الأحاديث النبوية</h2>
+                <div class="content">
+                    <div class="hadith-text">
+                        <p>عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم:</p>
+                        <p>"إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى..."</p>
+                    </div>
+                    <!-- سيتم إضافة المزيد من الأحاديث هنا -->
+                </div>
+            </section>
+
+            <section id="dua" class="section">
+                <h2 class="section-title"><i class="fas fa-hands-praying"></i> الأدعية والأذكار</h2>
+                <div class="content">
+                    <div class="dua-text">
+                        <p>اللَّهُمَّ أَنْتَ رَبِّي لا إِلَهَ إِلا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ...</p>
+                    </div>
+                    <!-- سيتم إضافة المزيد من الأدعية هنا -->
+                </div>
+            </section>
+
+            <section id="prayer-times" class="section">
+                <h2 class="section-title"><i class="fas fa-clock"></i> مواعيد الصلاة</h2>
+                <div class="prayer-times-container">
+                    <div class="location-search">
+                        <input type="text" id="city-input" placeholder="أدخل اسم المدينة">
+                        <button id="search-btn" class="search-btn"><i class="fas fa-search"></i> بحث</button>
+                    </div>
+                    
+                    <div class="dates">
+                        <div id="hijri-date"></div>
+                        <div id="gregorian-date"></div>
+                    </div>
+                    
+                    <div class="prayer-grid">
+                        <div class="prayer-card" id="fajr">
+                            <h3 class="prayer-name">الفجر</h3>
+                            <div class="time">--:--</div>
+                        </div>
+                        <div class="prayer-card" id="sunrise">
+                            <h3 class="prayer-name">الشروق</h3>
+                            <div class="time">--:--</div>
+                        </div>
+                        <div class="prayer-card" id="dhuhr">
+                            <h3 class="prayer-name">الظهر</h3>
+                            <div class="time">--:--</div>
+                        </div>
+                        <div class="prayer-card" id="asr">
+                            <h3 class="prayer-name">العصر</h3>
+                            <div class="time">--:--</div>
+                        </div>
+                        <div class="prayer-card" id="maghrib">
+                            <h3 class="prayer-name">المغرب</h3>
+                            <div class="time">--:--</div>
+                        </div>
+                        <div class="prayer-card" id="isha">
+                            <h3 class="prayer-name">العشاء</h3>
+                            <div class="time">--:--</div>
                         </div>
                     </div>
-
-                    <div class="ramadan-info-cards">
-                        <div class="info-card">
-                            <h4>أحكام الصيام</h4>
-                            <ul>
-                                <li>شروط وجوب الصيام</li>
-                                <li>مبطلات الصيام</li>
-                                <li>كفارة الصيام</li>
-                                <li>صيام التطوع</li>
-                            </ul>
-                        </div>
-                        <div class="info-card">
-                            <h4>فضائل رمضان</h4>
-                            <ul>
-                                <li>ليلة القدر</li>
-                                <li>صلاة التراويح</li>
-                                <li>صدقة الفطر</li>
-                                <li>العمرة في رمضان</li>
-                            </ul>
-                        </div>
-                        <div class="info-card">
-                            <h4>نصائح للصائم</h4>
-                            <ul>
-                                <li>نظام غذائي صحي</li>
-                                <li>إدارة الوقت</li>
-                                <li>العبادات في رمضان</li>
-                                <li>الاستعداد للعيد</li>
-                            </ul>
+                    
+                    <div class="next-prayer">
+                        <h3>الصلاة القادمة</h3>
+                        <div id="next-prayer-info">
+                            <p>جاري التحميل...</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="tasbeeh" class="section">
-            <h2 class="section-title"><i class="fas fa-circle-dot"></i> السبحة الإلكترونية</h2>
-            <div class="content">
-                <!-- سيتم إضافة محتوى السبحة الإلكترونية هنا -->
-            </div>
-        </section>
-
-        <section id="fiqh" class="section">
-            <h2 class="section-title"><i class="fas fa-scale-balanced"></i> الفقه والشريعة</h2>
-            <div class="content">
-                <div class="fiqh-container">
-                    <div class="fiqh-categories">
-                        <h3>أقسام الفقه</h3>
-                        <div class="category-list">
-                            <button class="category-btn" data-category="worship">العبادات</button>
-                            <button class="category-btn" data-category="transactions">المعاملات</button>
-                            <button class="category-btn" data-category="family">الأحوال الشخصية</button>
-                            <button class="category-btn" data-category="criminal">الحدود والجنايات</button>
+            <section id="ramadan" class="section">
+                <h2 class="section-title"><i class="fas fa-moon"></i> إمساكية رمضان</h2>
+                <div class="ramadan-container">
+                    <div class="ramadan-header">
+                        <div class="ramadan-info">
+                            <h3>شهر رمضان المبارك</h3>
+                            <div id="ramadan-date"></div>
+                        </div>
+                        <div class="ramadan-controls">
+                            <select id="ramadan-year-select">
+                                <!-- سيتم ملؤها بالسنوات المتاحة -->
+                            </select>
+                            <select id="ramadan-city-select">
+                                <!-- سيتم ملؤها بالمدن المتاحة -->
+                            </select>
                         </div>
                     </div>
 
-                    <div class="fiqh-content">
-                        <div class="search-box">
-                            <input type="text" id="fiqh-search" placeholder="ابحث في الفقه والشريعة...">
-                            <button id="search-fiqh-btn"><i class="fas fa-search"></i></button>
+                    <div class="ramadan-content">
+                        <div class="imsakiyah-table">
+                            <table id="ramadan-table">
+                                <thead>
+                                    <tr>
+                                        <th>اليوم</th>
+                                        <th>التاريخ الهجري</th>
+                                        <th>التاريخ الميلادي</th>
+                                        <th>الإمساك</th>
+                                        <th>الفجر</th>
+                                        <th>الشروق</th>
+                                        <th>الظهر</th>
+                                        <th>العصر</th>
+                                        <th>المغرب</th>
+                                        <th>العشاء</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- سيتم ملؤها بالبيانات -->
+                                </tbody>
+                            </table>
                         </div>
 
-                        <div class="fiqh-lessons">
-                            <h3>منهج الفقه والشريعة</h3>
-                            <div id="lessons-container">
-                                <!-- سيتم تحميل الدروس هنا -->
+                        <div class="ramadan-duas">
+                            <h3>أدعية رمضان</h3>
+                            <div class="dua-cards">
+                                <div class="dua-card">
+                                    <h4>دعاء الصيام</h4>
+                                    <p class="dua-text">نَوَيْتُ صَوْمَ غَدٍ عَنْ أَدَاءِ فَرْضِ شَهْرِ رَمَضَانَ هَذِهِ السَّنَةِ للهِ تَعَالَى</p>
+                                    <p class="dua-meaning">معناه: نويت أن أصوم غداً أداءً لفرض شهر رمضان هذه السنة لله تعالى</p>
+                                </div>
+                                <div class="dua-card">
+                                    <h4>دعاء الإفطار</h4>
+                                    <p class="dua-text">اللَّهُمَّ لَكَ صُمْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ، ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ، وَثَبَتَ الأَجْرُ إِنْ شَاءَ اللَّهُ</p>
+                                    <p class="dua-meaning">معناه: اللهم لك صمت وعلى رزقك أفطرت، ذهب الظمأ وابتلت العروق، وثبت الأجر إن شاء الله</p>
+                                </div>
+                                <div class="dua-card">
+                                    <h4>دعاء ليلة القدر</h4>
+                                    <p class="dua-text">اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي</p>
+                                    <p class="dua-meaning">معناه: اللهم إنك عفو تحب العفو فاعف عني</p>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="faq-section">
-                            <h3>الأسئلة الشائعة</h3>
-                            <div id="faq-container">
-                                <!-- سيتم تحميل الأسئلة الشائعة هنا -->
+                        <div class="ramadan-info-cards">
+                            <div class="info-card">
+                                <h4>أحكام الصيام</h4>
+                                <ul>
+                                    <li>شروط وجوب الصيام</li>
+                                    <li>مبطلات الصيام</li>
+                                    <li>كفارة الصيام</li>
+                                    <li>صيام التطوع</li>
+                                </ul>
+                            </div>
+                            <div class="info-card">
+                                <h4>فضائل رمضان</h4>
+                                <ul>
+                                    <li>ليلة القدر</li>
+                                    <li>صلاة التراويح</li>
+                                    <li>صدقة الفطر</li>
+                                    <li>العمرة في رمضان</li>
+                                </ul>
+                            </div>
+                            <div class="info-card">
+                                <h4>نصائح للصائم</h4>
+                                <ul>
+                                    <li>نظام غذائي صحي</li>
+                                    <li>إدارة الوقت</li>
+                                    <li>العبادات في رمضان</li>
+                                    <li>الاستعداد للعيد</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+
+            <section id="tasbeeh" class="section">
+                <h2 class="section-title"><i class="fas fa-circle-dot"></i> السبحة الإلكترونية</h2>
+                <div class="content">
+                    <!-- سيتم إضافة محتوى السبحة الإلكترونية هنا -->
+                </div>
+            </section>
+
+            <section id="fiqh" class="section">
+                <h2 class="section-title"><i class="fas fa-scale-balanced"></i> الفقه والشريعة</h2>
+                <div class="content">
+                    <div class="fiqh-container">
+                        <div class="fiqh-categories">
+                            <h3>أقسام الفقه</h3>
+                            <div class="category-list">
+                                <button class="category-btn" data-category="worship">العبادات</button>
+                                <button class="category-btn" data-category="transactions">المعاملات</button>
+                                <button class="category-btn" data-category="family">الأحوال الشخصية</button>
+                                <button class="category-btn" data-category="criminal">الحدود والجنايات</button>
+                            </div>
+                        </div>
+
+                        <div class="fiqh-content">
+                            <div class="search-box">
+                                <input type="text" id="fiqh-search" placeholder="ابحث في الفقه والشريعة...">
+                                <button id="search-fiqh-btn"><i class="fas fa-search"></i></button>
+                            </div>
+
+                            <div class="fiqh-lessons">
+                                <h3>منهج الفقه والشريعة</h3>
+                                <div id="lessons-container">
+                                    <!-- سيتم تحميل الدروس هنا -->
+                                </div>
+                            </div>
+
+                            <div class="faq-section">
+                                <h3>الأسئلة الشائعة</h3>
+                                <div id="faq-container">
+                                    <!-- سيتم تحميل الأسئلة الشائعة هنا -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
     <footer class="footer">
