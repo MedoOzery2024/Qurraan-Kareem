@@ -1172,4 +1172,92 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // تحميل الإمساكية للعام الحالي
     loadRamadanData();
+
+    // إدارة عرض الأقسام
+    const mainCards = document.querySelectorAll('.main-card');
+    const sectionsContainer = document.getElementById('sections-container');
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.nav-list a');
+
+    // إخفاء جميع الأقسام في البداية
+    sections.forEach(section => {
+        section.style.display = 'none';
+    });
+
+    // إضافة مستمعي الأحداث للبطاقات
+    mainCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const sectionId = card.getAttribute('data-section');
+            showSection(sectionId);
+            updateActiveNavLink(sectionId);
+        });
+    });
+
+    // إضافة مستمعي الأحداث لروابط القائمة
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const sectionId = link.getAttribute('href').substring(1);
+            if (sectionId === 'home') {
+                showHome();
+            } else {
+                showSection(sectionId);
+            }
+            updateActiveNavLink(sectionId);
+        });
+    });
+
+    // دالة لعرض القسم المحدد
+    function showSection(sectionId) {
+        // إخفاء البطاقات الرئيسية
+        document.getElementById('home').style.display = 'none';
+        
+        // إخفاء جميع الأقسام
+        sections.forEach(section => {
+            section.style.display = 'none';
+        });
+
+        // عرض القسم المحدد
+        const selectedSection = document.getElementById(sectionId);
+        if (selectedSection) {
+            selectedSection.style.display = 'block';
+            selectedSection.classList.add('active-section');
+            
+            // التمرير إلى القسم
+            selectedSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    // دالة لعرض الصفحة الرئيسية
+    function showHome() {
+        // إخفاء جميع الأقسام
+        sections.forEach(section => {
+            section.style.display = 'none';
+            section.classList.remove('active-section');
+        });
+
+        // عرض البطاقات الرئيسية
+        document.getElementById('home').style.display = 'grid';
+    }
+
+    // دالة لتحديث الرابط النشط في القائمة
+    function updateActiveNavLink(sectionId) {
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    // إضافة تأثيرات حركية للبطاقات
+    mainCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-10px)';
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+        });
+    });
 });
