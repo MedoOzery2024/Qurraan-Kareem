@@ -1,14 +1,15 @@
 :root {
-    --primary-color: #2E7D32;    /* أخضر داكن */
-    --secondary-color: #81C784;  /* أخضر فاتح */
-    --accent-color: #4CAF50;     /* أخضر متوسط */
-    --text-color: #1B5E20;       /* أخضر داكن للنصوص */
+    --primary-color: #1B5E20;    /* أخضر داكن */
+    --secondary-color: #4CAF50;  /* أخضر متوسط */
+    --accent-color: #81C784;     /* أخضر فاتح */
+    --text-color: #2E7D32;       /* أخضر داكن للنصوص */
     --light-text: #ffffff;
     --background-color: #F1F8E9; /* خلفية خضراء فاتحة جداً */
     --card-background: #ffffff;
     --shadow: 0 10px 20px rgba(46, 125, 50, 0.1);
     --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     --card-gradient: linear-gradient(135deg, #ffffff, #F1F8E9);
+    --hover-gradient: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
 }
 
 * {
@@ -29,7 +30,7 @@ body {
     background: var(--gradient);
     color: var(--light-text);
     text-align: center;
-    padding: 3rem 1rem;
+    padding: 4rem 2rem;
     position: relative;
     overflow: hidden;
     border-radius: 0 0 30px 30px;
@@ -44,12 +45,13 @@ body {
     right: 0;
     bottom: 0;
     background: url('https://images.unsplash.com/photo-1564769625905-5075c9653b8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
-    opacity: 0.15;
+    opacity: 0.1;
     z-index: 0;
 }
 
 .header .logo {
     font-size: 4rem;
+    color: var(--light-text);
     margin-bottom: 1.5rem;
     position: relative;
     z-index: 1;
@@ -58,6 +60,7 @@ body {
 
 .header h1 {
     font-size: 3rem;
+    color: var(--light-text);
     margin-bottom: 1rem;
     position: relative;
     z-index: 1;
@@ -74,40 +77,35 @@ body {
 /* Navigation Styles */
 .nav {
     background: var(--card-background);
-    box-shadow: var(--shadow);
+    padding: 1rem;
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-radius: 15px;
-    margin: -20px 20px 20px;
-    padding: 10px;
+    box-shadow: var(--shadow);
 }
 
 .nav-list {
     display: flex;
     justify-content: center;
-    list-style: none;
-    padding: 1rem;
     gap: 1rem;
-    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .nav-list a {
     color: var(--text-color);
     text-decoration: none;
-    font-weight: 600;
     padding: 0.8rem 1.5rem;
-    border-radius: 12px;
+    border-radius: 10px;
     transition: all 0.3s ease;
-    background: var(--card-gradient);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    background: var(--background-color);
 }
 
 .nav-list a:hover {
     background: var(--gradient);
     color: var(--light-text);
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(46, 125, 50, 0.15);
 }
 
 .nav-list a i {
@@ -1181,4 +1179,167 @@ body {
     .current-date {
         font-size: 1em;
     }
+}
+
+/* تحديث تصميم البطاقات الرئيسية */
+.main-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.main-card {
+    background: var(--card-background);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    height: 300px;
+}
+
+.main-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(46, 125, 50, 0.2);
+}
+
+.main-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--gradient);
+    transition: all 0.3s ease;
+}
+
+.main-card:hover::before {
+    height: 8px;
+    background: var(--hover-gradient);
+}
+
+.card-content {
+    padding: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+                url('https://images.unsplash.com/photo-1564769625905-5075c9653b8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+}
+
+.card-icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.main-card:hover .card-icon {
+    transform: scale(1.2);
+    color: var(--secondary-color);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.card-description {
+    color: var(--text-color);
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+/* تحديث تصميم الهيدر */
+.header {
+    background: var(--gradient);
+    padding: 4rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://images.unsplash.com/photo-1564769625905-5075c9653b8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.header .logo {
+    font-size: 4rem;
+    color: var(--light-text);
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+    animation: float 3s ease-in-out infinite;
+}
+
+.header h1 {
+    font-size: 3rem;
+    color: var(--light-text);
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* تحديث تصميم القسم النشط */
+.active-section {
+    animation: fadeIn 0.5s ease-out;
+    padding: 2rem;
+    background: var(--card-background);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    margin: 2rem auto;
+    max-width: 1200px;
+}
+
+/* تحديث تصميم القائمة */
+.nav {
+    background: var(--card-background);
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+}
+
+.nav-list {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-list a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    background: var(--background-color);
+}
+
+.nav-list a:hover {
+    background: var(--gradient);
+    color: var(--light-text);
+    transform: translateY(-3px);
 }
